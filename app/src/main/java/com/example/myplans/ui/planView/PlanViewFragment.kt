@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myplans.R
 
@@ -23,7 +22,7 @@ class PlanViewFragment : Fragment() {
             ViewModelProvider(this).get(PlanviewViewModel::class.java)
         val root = inflater.inflate(R.layout.setting_fragment, container, false)
         val textView: TextView = root.findViewById(R.id.text_setting)
-        planviewViewModel.text.observe(viewLifecycleOwner, Observer {
+        planviewViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
         return root
