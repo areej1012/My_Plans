@@ -20,9 +20,9 @@ class PlanViewFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         planviewViewModel =
-                ViewModelProvider(this).get(PlanviewViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_plan_view, container, false)
-        val textView: TextView = root.findViewById(R.id.text_slideshow)
+            ViewModelProvider(this).get(PlanviewViewModel::class.java)
+        val root = inflater.inflate(R.layout.setting_fragment, container, false)
+        val textView: TextView = root.findViewById(R.id.text_setting)
         planviewViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })

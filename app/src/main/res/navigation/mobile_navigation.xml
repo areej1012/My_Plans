@@ -8,18 +8,23 @@
     <fragment
         android:id="@+id/nav_plan_list"
         android:name="com.example.myplans.ui.plan.PlanFragment"
-        android:label="@string/menu_plan"
+        android:label="@string/day"
         tools:layout="@layout/fragment_plan" />
 
     <fragment
         android:id="@+id/nav_calendar"
         android:name="com.example.myplans.ui.calendar.CalendarFragment"
-        android:label="@string/menu_calendar"
+        android:label="@string/calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/nav_plan_view"
         android:name="com.example.myplans.ui.planView.PlanViewFragment"
-        android:label="@string/menu_plan"
+        android:label="@string/week"
         tools:layout="@layout/fragment_plan_view" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.myplans.ui.setting.SettingFragment"
+        android:label="setting_fragment"
+        tools:layout="@layout/setting_fragment" />
 </navigation>
