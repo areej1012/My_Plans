@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottmNav: BottomNavigationView
     private lateinit var sharedPreferences: SharedPreferences
     var is_view = false
-lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -33,18 +33,13 @@ lateinit var binding: ActivityMainBinding
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         bottmNav.background = null
-        is_view = readSharedPreferences()
 
-        if (is_view)
-            loadFragment(PlanViewFragment())
-        else
-            loadFragment(PlanFragment())
         bottomNavView()
 
     }
 
     private fun bottomNavView() {
-        bottmNav.setOnNavigationItemSelectedListener  { item ->
+        bottmNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_plan -> {
                     loadFragment(PlanFragment())
@@ -68,15 +63,15 @@ lateinit var binding: ActivityMainBinding
                 }
             }
             return@setOnNavigationItemSelectedListener false
-            }
-
         }
 
-    private fun readSharedPreferences() : Boolean{
-        return  sharedPreferences.getBoolean("is_view",false)
     }
 
-    private fun saveSharedPreferences(){
+    private fun readSharedPreferences(): Boolean {
+        return sharedPreferences.getBoolean("is_view", false)
+    }
+
+    private fun saveSharedPreferences() {
         with(sharedPreferences.edit()) {
             putBoolean("is_view", is_view)
             apply()
@@ -89,9 +84,4 @@ lateinit var binding: ActivityMainBinding
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = findNavController(R.id.nav_host_fragment)
-//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-//    }
 }
