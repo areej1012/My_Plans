@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         bottmNav.background = null
-
+        loadFragment(PlanFragment())
         bottomNavView()
 
     }

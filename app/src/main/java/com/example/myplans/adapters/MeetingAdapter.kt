@@ -28,6 +28,7 @@ class MeetingAdapter(val meetingList: List<Meeting>) :
                 liner.background =
                     holder.itemView.resources.getDrawable(R.drawable.meeting_pink, null)
                 img.setImageResource(R.drawable.date_pink)
+
             }
 
             tvTitle.text = meeting.title
