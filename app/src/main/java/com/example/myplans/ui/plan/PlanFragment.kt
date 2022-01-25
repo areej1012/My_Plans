@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myplans.DB.Course
-import com.example.myplans.DB.Meeting
-import com.example.myplans.adapters.CourseAdapter
-import com.example.myplans.adapters.MeetingAdapter
+import com.example.myplans.DB.*
+import com.example.myplans.adapters.*
 import com.example.myplans.databinding.FragmentPlanBinding
 
 class PlanFragment : Fragment() {
@@ -29,6 +27,9 @@ class PlanFragment : Fragment() {
 
         setUpMeeting()
         setUpCourse()
+        setUpHomeWork()
+        setUpQuiz()
+        setUpTask()
         return root
     }
 
@@ -51,7 +52,33 @@ class PlanFragment : Fragment() {
             Course(2, "How ", true, "fradiy", "10:00 - 11:00", 8),
             Course(2, "How Learn", true, "sunday", "12:00 - 14:00", 8)
         )
-        binding.rv.adapter = CourseAdapter(course)
-        binding.rv.layoutManager = LinearLayoutManager(activity)
+        binding.rvCourse.adapter = CourseAdapter(course)
+        binding.rvCourse.layoutManager = LinearLayoutManager(activity)
+    }
+
+    private fun setUpHomeWork() {
+        val homeWork = listOf<HomeWork>(HomeWork(5, "876", "uh", true, "15 Oct", 9))
+        binding.rvHW.adapter = HomeWorkAdapter(homeWork)
+        binding.rvHW.layoutManager = LinearLayoutManager(activity)
+    }
+
+    private fun setUpQuiz() {
+        val quiz = listOf<Quiz>(Quiz(2, "Quiz", "12 Oct", "12:00 PM", true, 10, "", 1))
+        binding.rvQuiz.adapter = QuizAdapter(quiz)
+        binding.rvQuiz.layoutManager = LinearLayoutManager(activity)
+    }
+
+    private fun setUpTask() {
+        val task = listOf<Task>(
+            Task(
+                2, "eso", "83w2",
+                isReminder = false,
+                isCompleted = false,
+                Date = "12 Oct",
+                fk = 1
+            )
+        )
+        binding.rvTask.adapter = TaskAdapter(task)
+        binding.rvTask.layoutManager = LinearLayoutManager(activity)
     }
 }

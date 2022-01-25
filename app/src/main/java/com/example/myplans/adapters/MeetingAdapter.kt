@@ -33,7 +33,7 @@ class MeetingAdapter(val meetingList: List<Meeting>) :
 
             tvTitle.text = meeting.title
             tvTime.text = meeting.time
-            tvLocation.text = meeting.Location
+            tvLocation.text = meeting.location
             tvDay.text = "15"
             tvMonth.text = meeting.date
         }

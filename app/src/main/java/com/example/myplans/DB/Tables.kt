@@ -27,7 +27,8 @@ data class Task(
     val titleTask: String,
     val description: String,
     val isReminder: Boolean,
-    val time: String,
+    val isCompleted: Boolean,
+    val Date: String,
     val fk: Int
 )
 
@@ -37,6 +38,7 @@ data class HomeWork(
     val title: String,
     val description: String,
     val isReminder: Boolean,
+    val date: String,
     val fk: Int
 )
 
@@ -58,5 +60,5 @@ data class Meeting(
     val title: String,
     val date: String,
     val time: String,
-    val Location: String
+    val location: String
 )

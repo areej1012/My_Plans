@@ -20,4 +20,11 @@
     <string name="icon_course">icon course</string>
     <string name="textview">TextView</string>
     <string name="icon_date">icon date</string>
+    <string name="your_homework">Your HomeWork</string>
+    <string name="icon_homework">icon homework</string>
+    <string name="your_task">Your Task</string>
+    <string name="your_quiz">Your Quiz</string>
+    <string name="completed">Completed</string>
+    <string name="icon_task">icon task</string>
+    <string name="icon_quiz">icon quiz</string>
 </resources>
