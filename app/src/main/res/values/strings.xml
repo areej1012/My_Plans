@@ -27,4 +27,7 @@
     <string name="completed">Completed</string>
     <string name="icon_task">icon task</string>
     <string name="icon_quiz">icon quiz</string>
+    <string name="update">Update</string>
+    <string name="cancel_this_course_only">Cancel this course only</string>
+    <string name="cancel_all">Cancel All</string>
 </resources>

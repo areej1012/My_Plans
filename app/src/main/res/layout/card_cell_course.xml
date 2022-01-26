@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +21,7 @@
 
             <ImageView
                 android:id="@+id/imageCourse"
-                android:layout_width="wrap_content"
+                android:layout_width="242dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
@@ -76,6 +71,17 @@
                     android:drawablePadding="5dp"
                     android:text="@string/textview" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewOptions"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:text="⋮"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-</LinearLayout>

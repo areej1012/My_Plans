@@ -2,12 +2,16 @@ package com.example.myplans.ui.plan
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myplans.DB.*
+import com.example.myplans.R
 import com.example.myplans.adapters.*
 import com.example.myplans.databinding.FragmentPlanBinding
 
@@ -15,6 +19,7 @@ class PlanFragment : Fragment() {
 
     private lateinit var planViewModel: PlanViewModel
     private lateinit var binding: FragmentPlanBinding
+    private lateinit var adapterCourse: CourseAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,7 +57,13 @@ class PlanFragment : Fragment() {
             Course(2, "How ", true, "fradiy", "10:00 - 11:00", 8),
             Course(2, "How Learn", true, "sunday", "12:00 - 14:00", 8)
         )
-        binding.rvCourse.adapter = CourseAdapter(course)
+        adapterCourse = CourseAdapter(course, object : CourseAdapter.OptionsMenuClickListener {
+            override fun onOptionsMenuClicked(position: Int) {
+                performOptionsMenuClick(position, course)
+            }
+
+        })
+        binding.rvCourse.adapter = adapterCourse
         binding.rvCourse.layoutManager = LinearLayoutManager(activity)
     }
 
@@ -70,15 +81,34 @@ class PlanFragment : Fragment() {
 
     private fun setUpTask() {
         val task = listOf<Task>(
-            Task(
-                2, "eso", "83w2",
-                isReminder = false,
-                isCompleted = false,
-                Date = "12 Oct",
-                fk = 1
-            )
+            Task(2, "eso", "83w2", false, false, "12 Oct", 1)
         )
         binding.rvTask.adapter = TaskAdapter(task)
         binding.rvTask.layoutManager = LinearLayoutManager(activity)
+    }
+
+    // this method will handle the onclick options click
+    private fun performOptionsMenuClick(position: Int, course: List<Course>) {
+        // create object of PopupMenu and pass context and view where we want
+        // to show the popup menu
+        val popupMenu =
+            PopupMenu(activity, binding.rvCourse[position].findViewById(R.id.textViewOptions))
+        // add the menu
+        popupMenu.inflate(R.menu.course_menu)
+
+        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+            override fun onMenuItemClick(item: MenuItem?): Boolean {
+                when (item?.itemId) {
+                    R.id.cancel_course_only -> {
+                        // here are the logic to delete an item from the list
+                        val tempLang = course[position]
+                        adapterCourse.notifyDataSetChanged()
+                        return true
+                    }
+                }
+                return false
+            }
+        })
+        popupMenu.show()
     }
 }

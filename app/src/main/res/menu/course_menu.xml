@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/update_course"
+        android:title="@string/update" />
+    <item
+        android:id="@+id/cancel_course_only"
+        android:title="@string/cancel_this_course_only" />
+    <item
+        android:id="@+id/cancel_courses"
+        android:title="@string/cancel_all" />
+</menu>
