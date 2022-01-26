@@ -29,5 +29,5 @@ class HomeWorkAdapter(val homeWorkList: List<HomeWork>) :
         }
     }
 
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = homeWorkList.size
 }

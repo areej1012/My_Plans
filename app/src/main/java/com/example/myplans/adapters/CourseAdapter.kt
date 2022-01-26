@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myplans.DB.Course
 import com.example.myplans.databinding.CardCellCourseBinding
 
-class CourseAdapter(private val listCourse: List<Course>) :
+class CourseAdapter(
+    private val listCourse: List<Course>,
+    private var optionsMenuClickListener: OptionsMenuClickListener
+) :
     RecyclerView.Adapter<CourseAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellCourseBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -32,4 +35,9 @@ class CourseAdapter(private val listCourse: List<Course>) :
     }
 
     override fun getItemCount(): Int = 3
+}
+
+// so that we can handle data most effectively in PlanFragment.kt
+interface OptionsMenuClickListener {
+    fun onOptionsMenuClicked(position: Int)
 }

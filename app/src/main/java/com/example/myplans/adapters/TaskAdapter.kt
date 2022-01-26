@@ -27,5 +27,5 @@ class TaskAdapter(val listTask: List<Task>) : RecyclerView.Adapter<TaskAdapter.H
         }
     }
 
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = listTask.size
 }

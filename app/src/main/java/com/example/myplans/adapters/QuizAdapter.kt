@@ -1,6 +1,5 @@
 package com.example.myplans.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +20,6 @@ class QuizAdapter(val listQuiz: List<Quiz>) : RecyclerView.Adapter<QuizAdapter.H
     }
 
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
-        Log.e("postion", position.toString())
         val quiz = listQuiz[position]
         holder.binding.apply {
             tvCourse.text = "Course"
@@ -31,5 +29,5 @@ class QuizAdapter(val listQuiz: List<Quiz>) : RecyclerView.Adapter<QuizAdapter.H
         }
     }
 
-    override fun getItemCount(): Int = 0
+    override fun getItemCount(): Int = listQuiz.size
 }

@@ -14,29 +14,11 @@
         android:layout_height="wrap_content"
         android:paddingBottom="30dp">
 
-        <EditText
-            android:id="@+id/ed_search"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:autofillHints="@string/search"
-            android:background="@drawable/bt_search"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:drawablePadding="16dp"
-            android:hint="@string/search"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="13dp"
             android:fontFamily="@font/avenir_regular"
             android:text="@string/meeting"
@@ -45,7 +27,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/rv_meeting"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_search" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_meeting"
