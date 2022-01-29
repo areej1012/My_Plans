@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "semester")
 data class Semester(
-    @PrimaryKey(autoGenerate = true) val pk: Int,
+    @PrimaryKey(autoGenerate = false)
     val semester: String,
     val startDate: String,
     val endDate: String
@@ -13,12 +13,12 @@ data class Semester(
 
 @Entity(tableName = "course")
 data class Course(
-    @PrimaryKey(autoGenerate = true) val pk: Int,
+    @PrimaryKey(autoGenerate = false)
     val name: String,
     val everyWeek: Boolean,
     val days: String,
     val time: String,
-    val fk_semester: Int
+    val fk_semester: String
 )
 
 @Entity(tableName = "task")

@@ -8,7 +8,7 @@ import com.example.myplans.DB.Semester
 data class SemesterWithCourses(
     @Embedded val semester: Semester,
     @Relation(
-        parentColumn = "pk",
+        parentColumn = "semester",
         entityColumn = "fk_semester"
     )
     val courses: List<Course>
