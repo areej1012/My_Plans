@@ -52,10 +52,10 @@ class PlanFragment : Fragment() {
 
     private fun setUpCourse() {
         val course = listOf<Course>(
-            Course(2, "How Learn", true, "sunday", "12:00 - 14:00", 8),
-            Course(2, "How monday", true, "monday", "1:00 - 4:00", 8),
-            Course(2, "How ", true, "fradiy", "10:00 - 11:00", 8),
-            Course(2, "How Learn", true, "sunday", "12:00 - 14:00", 8)
+            Course("Arabic", " Learn", true, "sunday", "12:00 - 14:00", ""),
+            Course("MAth", "How monday", true, "monday", "1:00 - 4:00", ""),
+            Course("Psh", "How ", true, "fradiy", "10:00 - 11:00", ""),
+            Course("Gam", "How Learn", true, "sunday", "12:00 - 14:00", "")
         )
         adapterCourse = CourseAdapter(course, object : CourseAdapter.OptionsMenuClickListener {
             override fun onOptionsMenuClicked(position: Int) {
@@ -81,7 +81,7 @@ class PlanFragment : Fragment() {
 
     private fun setUpTask() {
         val task = listOf<Task>(
-            Task(2, "eso", "83w2", false, false, "12 Oct", 1)
+            Task(2, "eso", "83w2", false, false, "12 Oct", "")
         )
         binding.rvTask.adapter = TaskAdapter(task)
         binding.rvTask.layoutManager = LinearLayoutManager(activity)

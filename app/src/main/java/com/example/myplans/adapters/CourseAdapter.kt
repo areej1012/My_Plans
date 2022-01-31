@@ -1,6 +1,5 @@
 package com.example.myplans.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -32,10 +31,9 @@ class CourseAdapter(
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
         val course = listCourse[position]
         holder.binding.apply {
-            tvTitle.text = course.name
+            tvTitle.text = course.nameCourse
             tvDate.text = course.days
             tvTime.text = course.time
-            Log.e("title", course.name)
         }
         // implement on clickListener and pass position of the item
         // rest we will handle in PlanFragment.kt

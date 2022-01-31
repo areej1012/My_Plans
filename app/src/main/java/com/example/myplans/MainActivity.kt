@@ -3,6 +3,9 @@ package com.example.myplans
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -19,7 +22,38 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var bottmNav: BottomNavigationView
     private lateinit var sharedPreferences: SharedPreferences
-    var is_view = false
+
+    // creating variable that handles Animations loading
+    // and initializing it with animation files that we have created
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_open_anim
+        )
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_close_anim
+        )
+    }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.from_bottom_anim
+        )
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.to_bottom_anim
+        )
+    }
+
+    //used to check if fab menu are opened or closed
+    private var closed = false
+
+
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +68,36 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         bottmNav.background = null
         loadFragment(PlanFragment())
-        bottomNavView()
 
+        binding.includedContent.fabAdd.setOnClickListener {
+            onAddButtonClick()
+        }
+
+    }
+
+    private fun onAddButtonClick() {
+        setVisibility(closed)
+        setAnimation(closed)
+        closed = !closed;
+    }
+
+    private fun setAnimation(closed: Boolean) {
+        if (!closed) {
+            binding.includedContent.menu.startAnimation(fromBottom)
+            binding.includedContent.fabAdd.startAnimation(rotateOpen)
+        } else {
+            binding.includedContent.menu.startAnimation(toBottom)
+            binding.includedContent.fabAdd.startAnimation(rotateClose)
+        }
+    }
+
+    private fun setVisibility(closed: Boolean) {
+
+        if (!closed) {
+            binding.includedContent.menu.visibility = View.VISIBLE
+        } else {
+            binding.includedContent.menu.visibility = View.VISIBLE
+        }
     }
 
     private fun bottomNavView() {
@@ -72,10 +134,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveSharedPreferences() {
-        with(sharedPreferences.edit()) {
-            putBoolean("is_view", is_view)
-            apply()
-        }
+//        with(sharedPreferences.edit()) {
+//            putBoolean("is_view", is_view)
+//            apply()
+//        }
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -84,4 +146,6 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
     }
+
+
 }

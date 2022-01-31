@@ -14,7 +14,8 @@ data class Semester(
 @Entity(tableName = "course")
 data class Course(
     @PrimaryKey(autoGenerate = false)
-    val name: String,
+    val nameCourse: String,
+    val title: String,
     val everyWeek: Boolean,
     val days: String,
     val time: String,
@@ -23,13 +24,13 @@ data class Course(
 
 @Entity(tableName = "task")
 data class Task(
-    @PrimaryKey(autoGenerate = true) val pk: Int,
+    @PrimaryKey(autoGenerate = true) val pk: Int?,
     val titleTask: String,
     val description: String,
     val isReminder: Boolean,
     val isCompleted: Boolean,
     val Date: String,
-    val fk: Int
+    val fk_nameCourse: String
 )
 
 @Entity(tableName = "home_work")
