@@ -1,4 +1,4 @@
-package com.example.myplans
+package com.example.myplans.activities
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.myplans.R
 import com.example.myplans.databinding.ActivityMainBinding
 import com.example.myplans.ui.calendar.CalendarFragment
 import com.example.myplans.ui.plan.PlanFragment

@@ -11,7 +11,7 @@
         android:theme="@style/Theme.MyPlans">
         <activity android:name=".activities.GetStartedActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyPlans.NoActionBar">
             <intent-filter>
