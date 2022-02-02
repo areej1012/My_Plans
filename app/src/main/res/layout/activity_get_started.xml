@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="333dp"
-        android:layout_height="283dp"
-        android:layout_marginTop="72dp"
+        android:layout_width="265dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="82dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,16 +35,16 @@
 
     <Button
         android:id="@+id/get_started"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="349dp"
+        android:layout_height="64dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/bt_get_started"
         android:backgroundTint="@color/pink"
         android:text="@string/start_learning"
         android:textAllCaps="false"
         android:textSize="18sp"
+        app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

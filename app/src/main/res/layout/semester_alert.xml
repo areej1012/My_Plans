@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
-    android:layout_height="200dp"
+    android:layout_height="300dp"
     android:layout_gravity="center"
     android:background="@color/white">
 
@@ -13,36 +13,49 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:text="Please write semester"
+        android:fontFamily="@font/avenir_regular"
+        android:text="@string/please_write_the_name_semester"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etsemester"
-        android:layout_width="179dp"
-        android:layout_height="47dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="45dp"
         android:ems="10"
-        android:hint="2022, Summer 2022"
+        android:hint="@string/_2022_summer_2022"
         android:inputType="textPersonName"
+        app:errorEnabled="true"
+        app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/saveSemester"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="51dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/bt_get_started"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/pink"
         android:text="Ok"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etsemester" />

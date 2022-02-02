@@ -32,4 +32,6 @@
     <string name="cancel_this_course_only">Cancel this course only</string>
     <string name="cancel_all">Cancel All</string>
     <string name="start_learning">Start learning</string>
+    <string name="please_write_the_name_semester">Please write the name semester</string>
+    <string name="_2022_summer_2022">2022, Summer 2022</string>
 </resources>

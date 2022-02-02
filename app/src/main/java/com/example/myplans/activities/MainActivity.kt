@@ -1,11 +1,16 @@
 package com.example.myplans.activities
 
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -16,6 +21,8 @@ import com.example.myplans.ui.plan.PlanFragment
 import com.example.myplans.ui.planView.PlanViewFragment
 import com.example.myplans.ui.setting.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +62,7 @@ class MainActivity : AppCompatActivity() {
     private var closed = false
 
 
+    private var isFirst = false
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,12 +76,49 @@ class MainActivity : AppCompatActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         bottmNav.background = null
+        //check is first time in app
+        isFirst = readSharedPreferences()
+        if (isFirst)
+            alertSemester()
+
         loadFragment(PlanFragment())
 
         binding.includedContent.fabAdd.setOnClickListener {
             onAddButtonClick()
         }
 
+    }
+
+    private fun alertSemester() {
+        if (isFirst) {
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.semester_alert)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(false)
+            val semesterNameLayout = dialog.findViewById<TextInputLayout>(R.id.etsemester)
+            val semeseterName = dialog.findViewById<TextInputEditText>(R.id.textInput)
+            val saveSemester = dialog.findViewById<Button>(R.id.saveSemester)
+
+            dialog.show()
+
+            saveSemester.setOnClickListener {
+                if (checkText(semeseterName.text.toString())) {
+                    semesterNameLayout.error = "Please fill in the semester name"
+                } else {
+                    // save name in database
+                    //save in sharedPreferences
+                    Toast.makeText(this, semeseterName.text.toString(), Toast.LENGTH_SHORT).show()
+                    isFirst = false
+                    saveSharedPreferences()
+                    //done
+                    dialog.dismiss()
+                }
+            }
+        }
+    }
+
+    private fun checkText(text: String): Boolean {
+        return text.isEmpty()
     }
 
     private fun onAddButtonClick() {
@@ -131,14 +176,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun readSharedPreferences(): Boolean {
-        return sharedPreferences.getBoolean("is_view", false)
+        return sharedPreferences.getBoolean("is_first_alert", true)
     }
 
     private fun saveSharedPreferences() {
-//        with(sharedPreferences.edit()) {
-//            putBoolean("is_view", is_view)
-//            apply()
-//        }
+        with(sharedPreferences.edit()) {
+            putBoolean("is_first_alert", isFirst)
+            apply()
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {

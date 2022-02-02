@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityGetStartedBinding
+import com.example.myplans.resources.lightStatueBar
+import com.example.myplans.resources.setFullScreen
 
 class GetStartedActivity : AppCompatActivity() {
     lateinit var binding: ActivityGetStartedBinding
@@ -18,15 +20,22 @@ class GetStartedActivity : AppCompatActivity() {
         binding = ActivityGetStartedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         sharedPreferences = this.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE
         )
-        checkIsFirstTime()
+        //  checkIsFirstTime()
 
         binding.getStarted.setOnClickListener {
             moveToNextActivity()
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setFullScreen(window)
+        lightStatueBar(window)
     }
 
     private fun checkIsFirstTime() {
