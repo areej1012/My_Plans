@@ -52,10 +52,10 @@ class PlanFragment : Fragment() {
 
     private fun setUpCourse() {
         val course = listOf<Course>(
-            Course("Arabic", " Learn", true, "sunday", "12:00 - 14:00", ""),
-            Course("MAth", "How monday", true, "monday", "1:00 - 4:00", ""),
-            Course("Psh", "How ", true, "fradiy", "10:00 - 11:00", ""),
-            Course("Gam", "How Learn", true, "sunday", "12:00 - 14:00", "")
+            Course("Arabic", true, "sunday", "12:00 - 14:00", "", ""),
+            Course("MAth", true, "monday", "1:00 - 4:00", "", ""),
+            Course("Psh", true, "fradiy", "10:00 - 11:00", "", ""),
+            Course("Gam", true, "sunday", "12:00 - 14:00", "", "")
         )
         adapterCourse = CourseAdapter(course, object : CourseAdapter.OptionsMenuClickListener {
             override fun onOptionsMenuClicked(position: Int) {

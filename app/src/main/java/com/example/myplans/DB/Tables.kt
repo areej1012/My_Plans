@@ -15,11 +15,11 @@ data class Semester(
 data class Course(
     @PrimaryKey(autoGenerate = false)
     val nameCourse: String,
-    val title: String,
     val everyWeek: Boolean,
     val days: String,
     val time: String,
-    val fk_semester: String
+    val fk_semester: String,
+    val image: String
 )
 
 @Entity(tableName = "task")
