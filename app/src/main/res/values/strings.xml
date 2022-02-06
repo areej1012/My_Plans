@@ -35,4 +35,10 @@
     <string name="please_write_the_name_semester">Please write the name semester</string>
     <string name="_2022_summer_2022">2022, Summer 2022</string>
     <string name="course_name">course name</string>
+    <string name="days">Days</string>
+    <string name="choose_time">Choose time</string>
+    <string name="start_time">Start Time</string>
+    <string name="choose_days">Choose Days</string>
+    <string name="end_time">End Time</string>
+    <string name="every_week">Every Week</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.myplans.activities
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -85,6 +86,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.includedContent.fabAdd.setOnClickListener {
             onAddButtonClick()
+        }
+        // add course button
+        binding.includedContent.addCourse.setOnClickListener {
+            startActivity(Intent(this, AddCourseActivity::class.java))
         }
 
     }
