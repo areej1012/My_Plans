@@ -3,15 +3,15 @@ package com.example.myplans.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myplans.DB.Course
-import com.example.myplans.databinding.CardCellCourseBinding
+import com.example.myplans.DB.ClassStudent
+import com.example.myplans.databinding.CardCellClassBinding
 
-class CourseAdapter(
-    private val listCourse: List<Course>,
+class ClassStudentAdapter(
+    private val listCourse: List<ClassStudent>,
     var optionsMenuClickListener: OptionsMenuClickListener
 ) :
-    RecyclerView.Adapter<CourseAdapter.HolderItem>() {
-    class HolderItem(val binding: CardCellCourseBinding) : RecyclerView.ViewHolder(binding.root)
+    RecyclerView.Adapter<ClassStudentAdapter.HolderItem>() {
+    class HolderItem(val binding: CardCellClassBinding) : RecyclerView.ViewHolder(binding.root)
 
     // so that we can handle data most effectively in PlanFragment.kt
     interface OptionsMenuClickListener {
@@ -20,7 +20,7 @@ class CourseAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderItem {
         return HolderItem(
-            CardCellCourseBinding.inflate(
+            CardCellClassBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -29,11 +29,11 @@ class CourseAdapter(
     }
 
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
-        val course = listCourse[position]
+        val classes = listCourse[position]
         holder.binding.apply {
-            tvTitle.text = course.nameCourse
-            tvDate.text = course.days
-            tvTime.text = course.time
+            tvTitle.text = classes.fk_nameCourse
+            tvDate.text = classes.days
+            tvTime.text = "${classes.timeStart} - ${classes.timeEnd}"
         }
         // implement on clickListener and pass position of the item
         // rest we will handle in PlanFragment.kt

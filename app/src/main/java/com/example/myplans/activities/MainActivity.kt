@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         bottmNav.background = null
+        bottomNavView()
         //check is first time in app
         isFirst = readSharedPreferences()
         if (isFirst)
@@ -167,6 +168,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_calendar -> {
                     loadFragment(CalendarFragment())
                     toolbar.title = "Calender"
+                    Toast.makeText(this, "Clendar", Toast.LENGTH_SHORT).show()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_setting -> {

@@ -57,6 +57,8 @@
         android:layout_gravity="top|end"
         android:orientation="vertical"
         android:visibility="invisible"
+        android:layout_margin="16dp"
+        android:paddingEnd="27dp"
         app:layout_anchor="@id/fabAdd">
 
         <LinearLayout

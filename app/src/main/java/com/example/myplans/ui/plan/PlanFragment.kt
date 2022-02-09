@@ -19,7 +19,7 @@ class PlanFragment : Fragment() {
 
     private lateinit var planViewModel: PlanViewModel
     private lateinit var binding: FragmentPlanBinding
-    private lateinit var adapterCourse: CourseAdapter
+    private lateinit var adapterClassStudent: ClassStudentAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,7 +31,7 @@ class PlanFragment : Fragment() {
         val root = binding.root
 
         setUpMeeting()
-        setUpCourse()
+        setUpClass()
         setUpHomeWork()
         setUpQuiz()
         setUpTask()
@@ -50,20 +50,21 @@ class PlanFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
     }
 
-    private fun setUpCourse() {
-        val course = listOf<Course>(
-            Course("Arabic", true, "sunday", "12:00 - 14:00", "", ""),
-            Course("MAth", true, "monday", "1:00 - 4:00", "", ""),
-            Course("Psh", true, "fradiy", "10:00 - 11:00", "", ""),
-            Course("Gam", true, "sunday", "12:00 - 14:00", "", "")
+    private fun setUpClass() {
+        val classes = listOf<ClassStudent>(
+            ClassStudent(6, "cc", true, "sunday", "12:00", "14:00", ""),
+            ClassStudent(7, "MAth", true, "monday", "1:00", "4:00", ""),
+            ClassStudent(2, "Psh", true, "fradiy", "10:00 ", "11:00", ""),
+            ClassStudent(6, "Gam", true, "sunday", "12:00", "14:00", "")
         )
-        adapterCourse = CourseAdapter(course, object : CourseAdapter.OptionsMenuClickListener {
-            override fun onOptionsMenuClicked(position: Int) {
-                performOptionsMenuClick(position, course)
-            }
+        adapterClassStudent =
+            ClassStudentAdapter(classes, object : ClassStudentAdapter.OptionsMenuClickListener {
+                override fun onOptionsMenuClicked(position: Int) {
+                    performOptionsMenuClick(position, classes)
+                }
 
-        })
-        binding.rvCourse.adapter = adapterCourse
+            })
+        binding.rvCourse.adapter = adapterClassStudent
         binding.rvCourse.layoutManager = LinearLayoutManager(activity)
     }
 
@@ -88,7 +89,7 @@ class PlanFragment : Fragment() {
     }
 
     // this method will handle the onclick options click
-    private fun performOptionsMenuClick(position: Int, course: List<Course>) {
+    private fun performOptionsMenuClick(position: Int, course: List<ClassStudent>) {
         // create object of PopupMenu and pass context and view where we want
         // to show the popup menu
         val popupMenu =
@@ -102,7 +103,7 @@ class PlanFragment : Fragment() {
                     R.id.cancel_course_only -> {
                         // here are the logic to delete an item from the list
                         val tempLang = course[position]
-                        adapterCourse.notifyDataSetChanged()
+                        adapterClassStudent.notifyDataSetChanged()
                         return true
                     }
                 }

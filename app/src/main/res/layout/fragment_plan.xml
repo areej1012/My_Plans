@@ -19,6 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="13dp"
             android:fontFamily="@font/avenir_regular"
             android:text="@string/meeting"
@@ -53,7 +54,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            tools:listitem="@layout/card_cell_course" />
+            tools:listitem="@layout/card_cell_class" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
