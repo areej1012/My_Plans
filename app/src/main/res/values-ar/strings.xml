@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Plans</string>
+    <string name="semester">السنة الدراسية</string>
+    <string name="course">المادة الدراسية</string>
+    <string name="homework">الواجبات</string>
+    <string name="tasks">المهام</string>
+    <string name="setting">الإعدادات</string>
+    <string name="quiz">الأختبارات</string>
+    <string name="day">اليوم</string>
+    <string name="calendar">التقويم</string>
+    <string name="week">الأسبوع</string>
+    <string name="meeting">الأجتماعات</string>
+    <string name="your_course">موادك الدراسية</string>
+    <string name="see_more">شاهد المزيد</string>
+    <string name="your_homework">واجباتك</string>
+    <string name="your_task">مهامك</string>
+    <string name="your_quiz">أختباراتك</string>
+    <string name="completed">مكتمل</string>
+    <string name="update">تحديث</string>
+    <string name="cancel_this_course_only">إلغاء هذا الدرس فقط</string>
+    <string name="cancel_all">إلغاء الدرس</string>
+    <string name="start_learning">أبدا التعلم</string>
+    <string name="please_write_the_name_semester">الرجاء كتابه اسم السنة الدراسية</string>
+    <string name="_2022_summer_2022">2022, صيف 2022</string>
+    <string name="course_name">اسم المادة</string>
+    <string name="days">الايام</string>
+    <string name="choose_time">أختر وقت</string>
+    <string name="start_time">وقت البداية</string>
+    <string name="choose_days">أختار الأيام</string>
+    <string name="end_time">وقت الانتهاء</string>
+    <string name="every_week">كل أسبوع</string>
+    <string name="description">وصف</string>
+    <string name="choose_course">أختر مادة</string>
+    <string name="choose_type_of_the_class">نوع الحصة الدراسية</string>
+</resources>

@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         }
         // add course button
         binding.includedContent.addCourse.setOnClickListener {
-            startActivity(Intent(this, AddCourseActivity::class.java))
+            startActivity(Intent(this, AddClassesActivity::class.java))
         }
 
     }
