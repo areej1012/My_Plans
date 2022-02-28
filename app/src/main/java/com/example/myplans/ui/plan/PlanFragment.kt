@@ -52,10 +52,10 @@ class PlanFragment : Fragment() {
 
     private fun setUpClass() {
         val classes = listOf<ClassStudent>(
-            ClassStudent(6, "cc", true, "sunday", "12:00", "14:00", ""),
-            ClassStudent(7, "MAth", true, "monday", "1:00", "4:00", ""),
-            ClassStudent(2, "Psh", true, "fradiy", "10:00 ", "11:00", ""),
-            ClassStudent(6, "Gam", true, "sunday", "12:00", "14:00", "")
+            ClassStudent(6, "cc", true, "sunday", "12:00", "14:00", "Math"),
+            ClassStudent(7, "Mth", true, "monday", "1:00", "4:00", "Program"),
+            ClassStudent(2, "Psh", true, "Sunday", "10:00 ", "11:00", "Data structures"),
+            ClassStudent(6, "Gam", true, "sunday", "12:00", "14:00", "NetWork")
         )
         adapterClassStudent =
             ClassStudentAdapter(classes, object : ClassStudentAdapter.OptionsMenuClickListener {
@@ -69,7 +69,7 @@ class PlanFragment : Fragment() {
     }
 
     private fun setUpHomeWork() {
-        val homeWork = listOf<HomeWork>(HomeWork(5, "876", "uh", true, "15 Oct", 9))
+        val homeWork = listOf<HomeWork>(HomeWork(5, "Project", "uh", true, "15 Oct", 9))
         binding.rvHW.adapter = HomeWorkAdapter(homeWork)
         binding.rvHW.layoutManager = LinearLayoutManager(activity)
     }

@@ -37,14 +37,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvCourse"
+                    android:id="@+id/tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                      />
 
                 <TextView
-                    android:id="@+id/tvTitle"
+                    android:id="@+id/tvCourse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

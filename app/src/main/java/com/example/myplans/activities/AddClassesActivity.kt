@@ -2,17 +2,19 @@ package com.example.myplans.activities
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myplans.R
 import com.example.myplans.databinding.ActivityAddClassesBinding
 import java.util.*
 
 class AddClassesActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddClassesBinding
     lateinit var datePickerDialog: DatePickerDialog
-
+    lateinit var dialog: Dialog
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,10 @@ class AddClassesActivity : AppCompatActivity() {
         initDatePicker()
         binding.btStartTime.setOnClickListener {
             openPicker()
+        }
+
+        binding.btChooseCourse.setOnClickListener {
+            showDialog(AddClassesActivity())
         }
     }
 
@@ -66,5 +72,12 @@ class AddClassesActivity : AppCompatActivity() {
 
     private fun openPicker() {
         datePickerDialog.show()
+    }
+
+    private fun showDialog(activity: AddClassesActivity) {
+        dialog = Dialog(activity)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.card_cell_add_course)
+        dialog.show()
     }
 }
