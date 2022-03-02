@@ -16,7 +16,7 @@ import androidx.room.RoomDatabase
     ], version = 1
 )
 abstract class PlansDatabase : RoomDatabase() {
-    abstract val plansDao: PlansDao
+    abstract fun plansDao(): PlansDao
 
     companion object {
         @Volatile

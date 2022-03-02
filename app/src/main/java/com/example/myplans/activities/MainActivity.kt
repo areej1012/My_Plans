@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -15,6 +16,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import com.example.myplans.DB.PlansDatabase
+import com.example.myplans.DB.Semester
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityMainBinding
 import com.example.myplans.ui.calendar.CalendarFragment
@@ -24,6 +27,10 @@ import com.example.myplans.ui.setting.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +38,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var bottmNav: BottomNavigationView
     private lateinit var sharedPreferences: SharedPreferences
+    private val planDoa by lazy {
+        PlansDatabase.getDatabase(this).plansDao()
+    }
 
     // creating variable that handles Animations loading
     // and initializing it with animation files that we have created
@@ -112,10 +122,23 @@ class MainActivity : AppCompatActivity() {
                     semesterNameLayout.error = "Please fill in the semester name"
                 } else {
                     // save name in database
+                    val calendar = Calendar.getInstance()
+                    val dateFormat = SimpleDateFormat("yyyy-mm-dd")
+                    val startDate = dateFormat.format(calendar.time)
+                    calendar.add(Calendar.MONTH, 3)
+                    val endDate = dateFormat.format(calendar.time)
+                    val newSemester = Semester(semeseterName.text.toString(), startDate, endDate)
+
+                    CoroutineScope(IO).launch {
+                        if (planDoa.insertSemester(newSemester) < 1)
+                            Log.e("Save", "Faild")
+                        else
+                            Log.e("Save", "work")
+                    }
+
                     //save in sharedPreferences
-                    Toast.makeText(this, semeseterName.text.toString(), Toast.LENGTH_SHORT).show()
                     isFirst = false
-                    saveSharedPreferences()
+                    saveSharedPreferences(saveSemester.text.toString())
                     //done
                     dialog.dismiss()
                 }
@@ -186,9 +209,10 @@ class MainActivity : AppCompatActivity() {
         return sharedPreferences.getBoolean("is_first_alert", true)
     }
 
-    private fun saveSharedPreferences() {
+    private fun saveSharedPreferences(semester: String) {
         with(sharedPreferences.edit()) {
             putBoolean("is_first_alert", isFirst)
+            putString("semester", semester)
             apply()
         }
     }
