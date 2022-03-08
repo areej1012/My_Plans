@@ -71,8 +71,6 @@ class MainActivity : AppCompatActivity() {
 
     //used to check if fab menu are opened or closed
     private var closed = false
-
-
     private var isFirst = false
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     private fun onAddButtonClick() {
         setVisibility(closed)
         setAnimation(closed)
-        closed = !closed;
+        closed = !closed
     }
 
     private fun setAnimation(closed: Boolean) {
@@ -171,7 +169,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setVisibility(closed: Boolean) {
-
         if (!closed) {
             binding.includedContent.menu.visibility = View.VISIBLE
         } else {
@@ -228,5 +225,8 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-
+    override fun onStop() {
+        super.onStop()
+        onAddButtonClick()
+    }
 }

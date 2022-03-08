@@ -1,0 +1,333 @@
+Index: app/src/main/java/com/example/myplans/activities/AddCourseActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myplans/activities/AddCourseActivity.kt	(date 1643892107914)
++++ app/src/main/java/com/example/myplans/activities/AddCourseActivity.kt	(date 1643892107914)
+@@ -0,0 +1,12 @@
++package com.example.myplans.activities
++
++import android.os.Bundle
++import androidx.appcompat.app.AppCompatActivity
++import com.example.myplans.R
++
++class AddCourseActivity : AppCompatActivity() {
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++        setContentView(R.layout.activity_add_course)
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/myplans/ui/plan/PlanFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myplans/ui/plan/PlanFragment.kt	(revision a9c09a9ca3335db5c2b388208e14f54e547e5daa)
++++ app/src/main/java/com/example/myplans/ui/plan/PlanFragment.kt	(date 1643892109060)
+@@ -52,10 +52,10 @@
+ 
+     private fun setUpCourse() {
+         val course = listOf<Course>(
+-            Course("Arabic", " Learn", true, "sunday", "12:00 - 14:00", ""),
+-            Course("MAth", "How monday", true, "monday", "1:00 - 4:00", ""),
+-            Course("Psh", "How ", true, "fradiy", "10:00 - 11:00", ""),
+-            Course("Gam", "How Learn", true, "sunday", "12:00 - 14:00", "")
++            Course("Arabic", true, "sunday", "12:00 - 14:00", "", ""),
++            Course("MAth", true, "monday", "1:00 - 4:00", "", ""),
++            Course("Psh", true, "fradiy", "10:00 - 11:00", "", ""),
++            Course("Gam", true, "sunday", "12:00 - 14:00", "", "")
+         )
+         adapterCourse = CourseAdapter(course, object : CourseAdapter.OptionsMenuClickListener {
+             override fun onOptionsMenuClicked(position: Int) {
+Index: app/src/main/res/layout/activity_add_course.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_add_course.xml	(date 1643892109043)
++++ app/src/main/res/layout/activity_add_course.xml	(date 1643892109043)
+@@ -0,0 +1,61 @@
++<?xml version="1.0" encoding="utf-8"?>
++<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="@color/white_sc"
++    android:fillViewport="true"
++    android:paddingBottom="56dp">
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:background="@color/white_sc"
++        tools:context=".activities.AddCourseActivity">
++
++        <ImageButton
++            android:id="@+id/imageButton2"
++            android:layout_width="118dp"
++            android:layout_height="116dp"
++            android:layout_marginStart="8dp"
++            android:layout_marginTop="8dp"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent"
++            app:srcCompat="@drawable/add_image" />
++
++        <com.google.android.material.textfield.TextInputLayout
++            android:id="@+id/textLyNC"
++            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
++            android:layout_width="226dp"
++            android:layout_height="85dp"
++            android:layout_marginStart="16dp"
++            android:layout_marginTop="28dp"
++            android:layout_marginEnd="16dp"
++            android:hint="@string/course_name"
++            app:errorEnabled="true"
++            app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintHorizontal_bias="0.37"
++            app:layout_constraintStart_toEndOf="@+id/imageButton2"
++            app:layout_constraintTop_toTopOf="parent">
++
++            <!--this is the actual edit text which takes the input-->
++            <com.google.android.material.textfield.TextInputEditText
++                android:id="@+id/edit_text"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content" />
++
++        </com.google.android.material.textfield.TextInputLayout>
++
++        <View
++            android:id="@+id/view"
++            android:layout_width="match_parent"
++            android:layout_height="1dp"
++            android:layout_marginTop="16dp"
++            android:background="@color/gray"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
++    </androidx.constraintlayout.widget.ConstraintLayout>
++</ScrollView>
+\ No newline at end of file
+Index: app/src/main/res/layout/card_cell_course.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/card_cell_course.xml	(revision a9c09a9ca3335db5c2b388208e14f54e547e5daa)
++++ app/src/main/res/layout/card_cell_course.xml	(date 1643892051632)
+@@ -36,14 +36,6 @@
+                 android:layout_weight="1"
+                 android:orientation="vertical">
+ 
+-                <TextView
+-                    android:id="@+id/tvCourse"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_margin="5dp"
+-                    android:text="@string/course"
+-                    android:textSize="13sp" />
+-
+                 <TextView
+                     android:id="@+id/tvTitle"
+                     android:layout_width="match_parent"
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision a9c09a9ca3335db5c2b388208e14f54e547e5daa)
++++ app/src/main/res/values/strings.xml	(date 1643890912528)
+@@ -34,4 +34,5 @@
+     <string name="start_learning">Start learning</string>
+     <string name="please_write_the_name_semester">Please write the name semester</string>
+     <string name="_2022_summer_2022">2022, Summer 2022</string>
++    <string name="course_name">course name</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/myplans/DB/Tables.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/myplans/DB/Tables.kt	(revision a9c09a9ca3335db5c2b388208e14f54e547e5daa)
++++ app/src/main/java/com/example/myplans/DB/Tables.kt	(date 1643892109053)
+@@ -15,11 +15,11 @@
+ data class Course(
+     @PrimaryKey(autoGenerate = false)
+     val nameCourse: String,
+-    val title: String,
+     val everyWeek: Boolean,
+     val days: String,
+     val time: String,
+-    val fk_semester: String
++    val fk_semester: String,
++    val image: String
+ )
+ 
+ @Entity(tableName = "task")
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision a9c09a9ca3335db5c2b388208e14f54e547e5daa)
++++ app/src/main/res/values/colors.xml	(date 1643892051776)
+@@ -10,4 +10,5 @@
+     <color name="blue">#4C6ef5</color>
+     <color name="pink">#ff8787</color>
+     <color name="white_sc">#F3F3FF</color>
++    <color name="gray">#999999</color>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision a9c09a9ca3335db5c2b388208e14f54e547e5daa)
++++ app/src/main/AndroidManifest.xml	(date 1643886352771)
+@@ -9,6 +9,7 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.MyPlans">
++        <activity android:name=".activities.AddCourseActivity"></activity>
+         <activity
+             android:name=".activities.GetStartedActivity"
+             android:theme="@style/Theme.MyPlans.GetStarted">
+@@ -17,14 +18,11 @@
+ 
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+-
+         </activity>
+         <activity
+             android:name=".activities.MainActivity"
+             android:label="@string/app_name"
+-            android:theme="@style/Theme.MyPlans.NoActionBar">
+-
+-        </activity>
++            android:theme="@style/Theme.MyPlans.NoActionBar"></activity>
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+diff --git app/src/main/res/drawable/add_image.png app/src/main/res/drawable/add_image.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..b5c1338e550cc6f0cdfc65d6ca95352e4628bff4
+GIT binary patch
+literal 5732
+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
+W#Lsb_{umno0000<MNUMnLSTX_4Yo4?
+

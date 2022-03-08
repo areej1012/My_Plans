@@ -41,6 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:visibility="invisible"
             tools:listitem="@layout/card_cell_meeting" />
 
         <androidx.recyclerview.widget.RecyclerView
