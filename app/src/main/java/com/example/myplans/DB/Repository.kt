@@ -13,4 +13,8 @@ class Repository(private val planDoa: PlansDao, semesterName: String) {
     suspend fun insertCourse(newCourse: Course) {
         planDoa.insertCourse(newCourse)
     }
+
+    suspend fun insertMeeting(newMeeting: Meeting) {
+        planDoa.insertMeeting(newMeeting)
+    }
 }

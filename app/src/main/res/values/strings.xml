@@ -27,6 +27,7 @@
     <string name="completed">Completed</string>
     <string name="icon_task">icon task</string>
     <string name="icon_quiz">icon quiz</string>
+    <string name="new_meeting">New Meeting</string>
     <string name="update">Update</string>
     <string name="cancel_this_course_only">Cancel this course only</string>
     <string name="cancel_all">Cancel All</string>
@@ -46,4 +47,10 @@
     <string name="see_more">See More</string>
     <string name="choose_your_course">Choose your course</string>
     <string name="add_a_new_course">Add a new course</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="choose_day">choose date</string>
+    <string name="time">Time</string>
+    <string name="location">Location</string>
+
 </resources>

@@ -2,33 +2,28 @@ package com.example.myplans.activities
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myplans.R
-import com.example.myplans.databinding.ActivityAddClassesBinding
+import com.example.myplans.databinding.ActivityAddMeetingBinding
 import java.util.*
 
-class AddClassesActivity : AppCompatActivity() {
-    lateinit var binding: ActivityAddClassesBinding
+class AddMeetingActivity : AppCompatActivity() {
+    lateinit var binding: ActivityAddMeetingBinding
     lateinit var datePickerDialog: DatePickerDialog
-    lateinit var dialog: Dialog
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddClassesBinding.inflate(layoutInflater)
+        binding = ActivityAddMeetingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         initDatePicker()
-        binding.btStartTime.setOnClickListener {
-            openPicker()
-        }
 
-        binding.btChooseCourse.setOnClickListener {
-            showDialog(AddClassesActivity())
+        binding.btDate.setOnClickListener {
+            openPicker()
         }
     }
 
@@ -36,7 +31,8 @@ class AddClassesActivity : AppCompatActivity() {
     private fun initDatePicker() {
         val dateListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
             val date = makeDateString(day, month, year)
-            binding.btStartTime.text = date
+            binding.btDate.text = date
+            Log.e("day", getMonthFormat(month))
         }
 
         val cel = Calendar.getInstance()
@@ -47,10 +43,11 @@ class AddClassesActivity : AppCompatActivity() {
 
         datePickerDialog = DatePickerDialog(this, style, dateListener, year, month, day)
 
+
     }
 
     private fun makeDateString(day: Int, month: Int, year: Int): String {
-        return "$day" + getMonthFormat(month) + "$year"
+        return "$day - " + getMonthFormat(month) + "- $year"
     }
 
     private fun getMonthFormat(month: Int): String {
@@ -73,12 +70,5 @@ class AddClassesActivity : AppCompatActivity() {
 
     private fun openPicker() {
         datePickerDialog.show()
-    }
-
-    private fun showDialog(activity: AddClassesActivity) {
-        dialog = Dialog(activity)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.card_cell_add_course)
-        dialog.show()
     }
 }

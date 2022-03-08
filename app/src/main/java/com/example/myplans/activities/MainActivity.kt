@@ -103,6 +103,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddClassesActivity::class.java))
         }
 
+        binding.includedContent.addMeeting.setOnClickListener {
+            startActivity(Intent(this, AddMeetingActivity::class.java))
+        }
+
     }
 
     private fun alertSemester() {

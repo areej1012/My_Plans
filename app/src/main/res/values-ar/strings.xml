@@ -33,4 +33,12 @@
     <string name="description">وصف</string>
     <string name="choose_course">أختر مادة</string>
     <string name="choose_type_of_the_class">نوع الحصة الدراسية</string>
+    <string name="add">إضافة</string>
+    <string name="home">الرئيسية</string>
+    <string name="new_meeting">إجتماع جديد</string>
+    <string name="time">الوقت</string>
+    <string name="date">التاريخ</string>
+    <string name="title">العنوان</string>
+    <string name="location">الموقع</string>
+    <string name="choose_day">أختار تاريخ</string>
 </resources>

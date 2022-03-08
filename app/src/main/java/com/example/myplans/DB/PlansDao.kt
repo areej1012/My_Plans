@@ -7,10 +7,13 @@ import com.example.myplans.DB.Relations.SemesterWithCourses
 @Dao
 interface PlansDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertSemester(Semester: Semester): Long
+    fun insertSemester(semester: Semester): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertCourse(course: Course): Long
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertMeeting(meeting: Meeting)
 
 
     @Transaction

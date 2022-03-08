@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_sc">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MyPlans.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white_sc"
+            app:popupTheme="@style/Theme.MyPlans.PopupOverlay"
+            app:title="@string/new_meeting"
+            app:titleTextColor="@color/black" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_sc"
+        android:fillViewport="true"
+        android:paddingBottom="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_sc"
+            tools:context=".activities.AddMeetingActivity">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawableStart="@drawable/ic_baseline_description_24"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="@string/title"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textLyNC"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:boxBackgroundMode="outline"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_baseline_error_outline_24">
+
+                    <!--this is the actual edit text which takes the input-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawableStart="@drawable/ic_baseline_description_24"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="@string/location"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textLyNLocation"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:errorEnabled="true"
+                    app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+                    app:hintTextColor="@color/black">
+
+                    <!--this is the actual edit text which takes the input-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tvLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawableStart="@drawable/ic_day"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="@string/date"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/white_sc"
+                    android:text="@string/choose_day"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawableStart="@drawable/ic_time"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="@string/time"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/white_sc"
+                    android:text="@string/choose_time"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray" />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
