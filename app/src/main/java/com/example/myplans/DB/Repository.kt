@@ -1,10 +1,9 @@
 package com.example.myplans.DB
 
 import androidx.lifecycle.LiveData
-import com.example.myplans.DB.Relations.SemesterWithCourses
 
-class Repository(private val planDoa: PlansDao, semesterName: String) {
-    val getClass: LiveData<List<SemesterWithCourses>> = planDoa.getSemesterWithCourse(semesterName)
+class Repository(private val planDoa: PlansDao) {
+    // val getClass: LiveData<List<SemesterWithCourses>> = planDoa.getSemesterWithCourse(semesterName!!)
 
     suspend fun insertSemester(newSemester: Semester) {
         planDoa.insertSemester(newSemester)
@@ -14,7 +13,12 @@ class Repository(private val planDoa: PlansDao, semesterName: String) {
         planDoa.insertCourse(newCourse)
     }
 
+
     suspend fun insertMeeting(newMeeting: Meeting) {
         planDoa.insertMeeting(newMeeting)
+    }
+
+    fun getMeetings(timeNow: String): LiveData<List<Meeting>> {
+        return planDoa.getMeeting(timeNow)
     }
 }

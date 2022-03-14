@@ -7,7 +7,7 @@ import com.example.myplans.DB.Meeting
 import com.example.myplans.R
 import com.example.myplans.databinding.CardCellMeetingBinding
 
-class MeetingAdapter(val meetingList: List<Meeting>) :
+class MeetingAdapter(private var meetingList: List<Meeting>) :
     RecyclerView.Adapter<MeetingAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellMeetingBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -40,4 +40,9 @@ class MeetingAdapter(val meetingList: List<Meeting>) :
     }
 
     override fun getItemCount(): Int = meetingList.size
+
+    fun update(newList: List<Meeting>) {
+        meetingList = newList
+        notifyDataSetChanged()
+    }
 }

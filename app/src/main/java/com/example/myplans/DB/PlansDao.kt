@@ -13,8 +13,10 @@ interface PlansDao {
     fun insertCourse(course: Course): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertMeeting(meeting: Meeting)
+    fun insertMeeting(meeting: Meeting): Long
 
+    @Query("SELECT * From meeting where date >= :timeNow ORDER BY :timeNow")
+    fun getMeeting(timeNow: String): LiveData<List<Meeting>>
 
     @Transaction
     @Query("SELECT * FROM semester WHERE semester = :Semester")

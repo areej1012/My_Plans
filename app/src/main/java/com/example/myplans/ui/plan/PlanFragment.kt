@@ -1,6 +1,7 @@
 package com.example.myplans.ui.plan
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -17,20 +18,19 @@ import com.example.myplans.databinding.FragmentPlanBinding
 
 class PlanFragment : Fragment() {
 
-    private lateinit var planViewModel: PlanViewModel
     private lateinit var binding: FragmentPlanBinding
     private lateinit var adapterClassStudent: ClassStudentAdapter
+    private val viewModel by lazy { ViewModelProvider(this)[PlanViewModel::class.java] }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        planViewModel =
-            ViewModelProvider(this).get(PlanViewModel::class.java)
+
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        setUpMeeting()
+
         setUpClass()
         setUpHomeWork()
         setUpQuiz()
@@ -38,16 +38,29 @@ class PlanFragment : Fragment() {
         return root
     }
 
-    private fun setUpMeeting() {
-        val meeting = listOf<Meeting>(
-            Meeting(2, "Meeting", "oct", "11:00 AM", "A102"),
-            Meeting(2, "Friends", "sept", "10:00 AM", "B102"),
-            Meeting(2, "Family", "Nov", "11:00 AM", "A102")
-        )
+    override fun onStart() {
+        super.onStart()
+        setUpMeeting()
+    }
 
+    private fun setUpMeeting() {
+        val meeting = listOf<Meeting>()
         binding.rvMeeting.adapter = MeetingAdapter(meeting)
         binding.rvMeeting.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
+
+
+        activity?.let {
+            viewModel.getMeetings().observe(it, { meeting ->
+                Log.e("meeting size", meeting.size.toString())
+                if (meeting.isNotEmpty()) {
+                    binding.meeting.visibility = View.VISIBLE
+                    binding.rvMeeting.visibility = View.VISIBLE
+                }
+            }
+            )
+        }
+
     }
 
     private fun setUpClass() {

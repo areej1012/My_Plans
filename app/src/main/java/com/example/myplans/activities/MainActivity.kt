@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 
                     CoroutineScope(IO).launch {
                         if (planDoa.insertSemester(newSemester) < 1)
-                            Log.e("Save", "Faild")
+                            Log.e("Save", "Failed")
                         else
                             Log.e("Save", "work")
                     }

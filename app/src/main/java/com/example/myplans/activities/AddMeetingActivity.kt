@@ -8,58 +8,59 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myplans.DB.Meeting
+import com.example.myplans.DB.PlansDatabase
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityAddMeetingBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import java.util.*
 
 class AddMeetingActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddMeetingBinding
     lateinit var datePickerDialog: DatePickerDialog
+    private val planDao by lazy { PlansDatabase.getDatabase(this).plansDao() }
 
     // listener which is triggered when the
     // time is picked from the time picker dialog
     private val timePickerDialogListener: TimePickerDialog.OnTimeSetListener =
-        object : TimePickerDialog.OnTimeSetListener {
-            override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-
-                // logic to properly handle
-                // the picked timings by user
-                val formattedTime: String = when {
-                    hourOfDay == 0 -> {
-                        if (minute < 10) {
-                            "${hourOfDay + 12}:0${minute} am"
-                        } else {
-                            "${hourOfDay + 12}:${minute} am"
-                        }
-                    }
-                    hourOfDay > 12 -> {
-                        if (minute < 10) {
-                            "${hourOfDay - 12}:0${minute} pm"
-                        } else {
-                            "${hourOfDay - 12}:${minute} pm"
-                        }
-                    }
-                    hourOfDay == 12 -> {
-                        if (minute < 10) {
-                            "${hourOfDay}:0${minute} pm"
-                        } else {
-                            "${hourOfDay}:${minute} pm"
-                        }
-                    }
-                    else -> {
-                        if (minute < 10) {
-                            "${hourOfDay}:${minute} am"
-                        } else {
-                            "${hourOfDay}:${minute} am"
-                        }
+        TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute -> // logic to properly handle
+            // the picked timings by user
+            val formattedTime: String = when {
+                hourOfDay == 0 -> {
+                    if (minute < 10) {
+                        "${hourOfDay + 12}:0${minute} am"
+                    } else {
+                        "${hourOfDay + 12}:${minute} am"
                     }
                 }
-
-                binding.btTime.text = formattedTime
+                hourOfDay > 12 -> {
+                    if (minute < 10) {
+                        "${hourOfDay - 12}:0${minute} pm"
+                    } else {
+                        "${hourOfDay - 12}:${minute} pm"
+                    }
+                }
+                hourOfDay == 12 -> {
+                    if (minute < 10) {
+                        "${hourOfDay}:0${minute} pm"
+                    } else {
+                        "${hourOfDay}:${minute} pm"
+                    }
+                }
+                else -> {
+                    if (minute < 10) {
+                        "${hourOfDay}:${minute} am"
+                    } else {
+                        "${hourOfDay}:${minute} am"
+                    }
+                }
             }
+
+            binding.btTime.text = formattedTime
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -89,10 +90,31 @@ class AddMeetingActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add -> {
-                finish()
+                saveInDB()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun saveInDB() {
+        if (binding.tvTitle.text?.isEmpty() == true)
+            binding.textLyNC.error = "Please fill up the title"
+        else {
+            val time = binding.btTime.text.toString()
+            val date = binding.btDate.text.toString()
+            val location = binding.tvLocation.text.toString()
+            val newMeeting = Meeting(null, binding.tvTitle.toString(), date, time, location)
+            CoroutineScope(IO).launch {
+                if (planDao.insertMeeting(newMeeting) < 1)
+                    Log.e("Save meeting", "Failed")
+                else
+                    Log.e("Save meeting", "sucsse")
+                finish()
+
+            }
+
+
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -108,7 +130,6 @@ class AddMeetingActivity : AppCompatActivity() {
         val month = cel.get(Calendar.MONTH)
         val day = cel.get(Calendar.DAY_OF_MONTH)
         val style = AlertDialog.THEME_HOLO_LIGHT
-
         datePickerDialog = DatePickerDialog(this, style, dateListener, year, month, day)
 
 

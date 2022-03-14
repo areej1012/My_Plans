@@ -20,7 +20,7 @@ data class Course(
     val fk_semester: String,
 )
 
-@Entity(tableName = "Classes")
+@Entity(tableName = "classes")
 data class ClassStudent(
     @PrimaryKey(autoGenerate = true)
     val pk: Int,
@@ -67,9 +67,9 @@ data class Quiz(
 
 @Entity(tableName = "meeting")
 data class Meeting(
-    @PrimaryKey(autoGenerate = true) val pk: Int,
+    @PrimaryKey(autoGenerate = true) val pk: Int?,
     val title: String,
     val date: String,
     val time: String,
-    val location: String
+    val location: String?
 )
