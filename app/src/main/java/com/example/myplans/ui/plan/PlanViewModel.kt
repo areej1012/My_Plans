@@ -18,7 +18,7 @@ class PlanViewModel(application: Application) : AndroidViewModel(application) {
         val planDao = PlansDatabase.getDatabase(application).plansDao()
         repository = Repository(planDao)
         val cel = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("yyyy-mm-dd")
+        val dateFormat = SimpleDateFormat("dd-mm-yyyy")
         val timeNow = dateFormat.format(cel.time)
         meetings = repository.getMeetings(timeNow)
 

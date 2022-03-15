@@ -69,7 +69,9 @@ data class Quiz(
 data class Meeting(
     @PrimaryKey(autoGenerate = true) val pk: Int?,
     val title: String,
-    val date: String,
+    val day: String,
+    val month: String,
+    val year: String,
     val time: String,
     val location: String?
 )

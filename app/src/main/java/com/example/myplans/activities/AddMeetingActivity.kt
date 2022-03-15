@@ -23,6 +23,9 @@ class AddMeetingActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddMeetingBinding
     lateinit var datePickerDialog: DatePickerDialog
     private val planDao by lazy { PlansDatabase.getDatabase(this).plansDao() }
+    private var day = ""
+    private var month = ""
+    private var year = ""
 
     // listener which is triggered when the
     // time is picked from the time picker dialog
@@ -74,7 +77,7 @@ class AddMeetingActivity : AppCompatActivity() {
         initDatePicker()
 
         binding.btTime.setOnClickListener {
-            val timePicker = TimePickerDialog(this, timePickerDialogListener, 12, 10, false)
+            val timePicker = TimePickerDialog(this, timePickerDialogListener, 12, 0, false)
             timePicker.show()
         }
         binding.btDate.setOnClickListener {
@@ -101,9 +104,9 @@ class AddMeetingActivity : AppCompatActivity() {
             binding.textLyNC.error = "Please fill up the title"
         else {
             val time = binding.btTime.text.toString()
-            val date = binding.btDate.text.toString()
             val location = binding.tvLocation.text.toString()
-            val newMeeting = Meeting(null, binding.tvTitle.toString(), date, time, location)
+            val newMeeting =
+                Meeting(null, binding.tvTitle.text.toString(), day, month, year, time, location)
             CoroutineScope(IO).launch {
                 if (planDao.insertMeeting(newMeeting) < 1)
                     Log.e("Save meeting", "Failed")
@@ -121,7 +124,11 @@ class AddMeetingActivity : AppCompatActivity() {
     private fun initDatePicker() {
         val dateListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
             val date = makeDateString(day, month, year)
+            Log.e("month", month.toString())
             binding.btDate.text = date
+            this.day = "$day"
+            this.month = "$month"
+            this.year = "$year"
             Log.e("day", getMonthFormat(month))
         }
 
@@ -141,18 +148,18 @@ class AddMeetingActivity : AppCompatActivity() {
 
     private fun getMonthFormat(month: Int): String {
         when (month) {
-            1 -> return "Jan"
-            2 -> return "Feb"
-            3 -> return "Mar"
-            4 -> return "Apr"
-            5 -> return "May"
-            6 -> return "June"
-            7 -> return "July"
-            8 -> return "Aug"
-            9 -> return "Sept"
-            10 -> return "Oct"
-            11 -> return "Nov"
-            12 -> return "Dec"
+            0 -> return "Jan"
+            1 -> return "Feb"
+            2 -> return "Mar"
+            3 -> return "Apr"
+            4 -> return "May"
+            5 -> return "June"
+            6 -> return "July"
+            7 -> return "Aug"
+            8 -> return "Sept"
+            9 -> return "Oct"
+            10 -> return "Nov"
+            11 -> return "Dec"
         }
         return "Jan"
     }

@@ -20,7 +20,9 @@ class PlanFragment : Fragment() {
 
     private lateinit var binding: FragmentPlanBinding
     private lateinit var adapterClassStudent: ClassStudentAdapter
+    private lateinit var meetingAdapter: MeetingAdapter
     private val viewModel by lazy { ViewModelProvider(this)[PlanViewModel::class.java] }
+    private val meetingList = listOf<Meeting>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +31,12 @@ class PlanFragment : Fragment() {
 
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val root = binding.root
+
+        meetingAdapter = MeetingAdapter(meetingList)
+        binding.rvMeeting.adapter = meetingAdapter
+        binding.rvMeeting.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
+
 
 
         setUpClass()
@@ -44,11 +52,6 @@ class PlanFragment : Fragment() {
     }
 
     private fun setUpMeeting() {
-        val meeting = listOf<Meeting>()
-        binding.rvMeeting.adapter = MeetingAdapter(meeting)
-        binding.rvMeeting.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
-
 
         activity?.let {
             viewModel.getMeetings().observe(it, { meeting ->
@@ -56,6 +59,7 @@ class PlanFragment : Fragment() {
                 if (meeting.isNotEmpty()) {
                     binding.meeting.visibility = View.VISIBLE
                     binding.rvMeeting.visibility = View.VISIBLE
+                    meetingAdapter.update(meeting)
                 }
             }
             )

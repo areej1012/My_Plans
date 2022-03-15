@@ -34,8 +34,9 @@ class MeetingAdapter(private var meetingList: List<Meeting>) :
             tvTitle.text = meeting.title
             tvTime.text = meeting.time
             tvLocation.text = meeting.location
-            tvDay.text = "15"
-            tvMonth.text = meeting.date
+            tvDay.text = meeting.day
+            tvMonth.text = getMonthFormat(Integer.parseInt(meeting.month))
+
         }
     }
 
@@ -45,4 +46,23 @@ class MeetingAdapter(private var meetingList: List<Meeting>) :
         meetingList = newList
         notifyDataSetChanged()
     }
+
+    private fun getMonthFormat(month: Int): String {
+        when (month) {
+            0 -> return "Jan"
+            1 -> return "Feb"
+            2 -> return "Mar"
+            3 -> return "Apr"
+            4 -> return "May"
+            5 -> return "June"
+            6 -> return "July"
+            7 -> return "Aug"
+            8 -> return "Sept"
+            9 -> return "Oct"
+            10 -> return "Nov"
+            11 -> return "Dec"
+        }
+        return "Jan"
+    }
+
 }
