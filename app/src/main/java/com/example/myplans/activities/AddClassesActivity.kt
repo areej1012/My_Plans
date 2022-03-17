@@ -1,84 +1,90 @@
 package com.example.myplans.activities
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
+import android.app.Activity
 import android.app.Dialog
-import android.os.Build
+import android.app.TimePickerDialog
 import android.os.Bundle
-import androidx.annotation.RequiresApi
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityAddClassesBinding
-import java.util.*
 
 class AddClassesActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddClassesBinding
-    lateinit var datePickerDialog: DatePickerDialog
-    lateinit var dialog: Dialog
-    @RequiresApi(Build.VERSION_CODES.N)
+    var arrayCourse = arrayListOf<String>("Math", "Champers")
+    private val timerStartDialogListener: TimePickerDialog.OnTimeSetListener =
+        TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute -> // logic to properly handle
+            // the picked timings by user
+            val formattedTime: String = when {
+                hourOfDay == 0 -> {
+                    if (minute < 10) {
+                        "${hourOfDay + 12}:0${minute} am"
+                    } else {
+                        "${hourOfDay + 12}:${minute} am"
+                    }
+                }
+                hourOfDay > 12 -> {
+                    if (minute < 10) {
+                        "${hourOfDay - 12}:0${minute} pm"
+                    } else {
+                        "${hourOfDay - 12}:${minute} pm"
+                    }
+                }
+                hourOfDay == 12 -> {
+                    if (minute < 10) {
+                        "${hourOfDay}:0${minute} pm"
+                    } else {
+                        "${hourOfDay}:${minute} pm"
+                    }
+                }
+                else -> {
+                    if (minute < 10) {
+                        "${hourOfDay}:${minute} am"
+                    } else {
+                        "${hourOfDay}:${minute} am"
+                    }
+                }
+            }
+
+            binding.btTimeStart.text = formattedTime
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddClassesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        initDatePicker()
-        binding.btStartTime.setOnClickListener {
-            openPicker()
-        }
 
-        binding.btChooseCourse.setOnClickListener {
-            showDialog(AddClassesActivity())
+        binding.btCourse.setOnClickListener {
+            showDialog(this)
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun initDatePicker() {
-        val dateListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
-            val date = makeDateString(day, month, year)
-            binding.btStartTime.text = date
-        }
 
-        val cel = Calendar.getInstance()
-        val year = cel.get(Calendar.YEAR)
-        val month = cel.get(Calendar.MONTH)
-        val day = cel.get(Calendar.DAY_OF_MONTH)
-        val style = AlertDialog.THEME_HOLO_LIGHT
-
-        datePickerDialog = DatePickerDialog(this, style, dateListener, year, month, day)
-
-    }
-
-    private fun makeDateString(day: Int, month: Int, year: Int): String {
-        return "$day" + getMonthFormat(month) + "$year"
-    }
-
-    private fun getMonthFormat(month: Int): String {
-        when (month) {
-            1 -> return "Jan"
-            2 -> return "Feb"
-            3 -> return "Mar"
-            4 -> return "Apr"
-            5 -> return "May"
-            6 -> return "June"
-            7 -> return "July"
-            8 -> return "Aug"
-            9 -> return "Sept"
-            10 -> return "Oct"
-            11 -> return "Nov"
-            12 -> return "Dec"
-        }
-        return "Jan"
-    }
-
-    private fun openPicker() {
-        datePickerDialog.show()
-    }
-
-    private fun showDialog(activity: AddClassesActivity) {
-        dialog = Dialog(activity)
+    private fun showDialog(activity: Activity) {
+        val dialog = Dialog(activity)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.card_cell_add_course)
+        dialog.setContentView(R.layout.custom_dialog_class)
+
+        // declare button in alert
+        val btDialogAdd = dialog.findViewById(R.id.btAddCourse) as Button
+        btDialogAdd.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // declare list view
+        val listView = dialog.findViewById<ListView>(R.id.ListView)
+        val arrayAdapter =
+            ArrayAdapter(this, R.layout.card_cell_add_course, R.id.tvCourse, arrayCourse)
+        listView.adapter = arrayAdapter
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            binding.btCourse.text = arrayCourse[position]
+            dialog.dismiss()
+        }
         dialog.show()
     }
 }

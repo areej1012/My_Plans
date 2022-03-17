@@ -31,8 +31,8 @@ class ClassStudentAdapter(
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
         val classes = listCourse[position]
         holder.binding.apply {
-            tvCourse.text = classes.fk_nameCourse
-            tvDate.text = classes.days
+            tvCourse.text = classes.className
+            tvDate.text = classes.day
             tvTime.text = "${classes.timeStart} - ${classes.timeEnd}"
         }
         // implement on clickListener and pass position of the item

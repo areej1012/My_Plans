@@ -41,7 +41,6 @@
     <string name="choose_days">Choose Days</string>
     <string name="end_time">End Time</string>
     <string name="every_week">Every Week</string>
-    <string name="description">Description</string>
     <string name="choose_course">Choose Course</string>
     <string name="choose_type_of_the_class">Choose type of the class</string>
     <string name="see_more">See More</string>
@@ -49,8 +48,10 @@
     <string name="add_a_new_course">Add a new course</string>
     <string name="title">Title</string>
     <string name="date">Date</string>
-    <string name="choose_day">choose date</string>
+    <string name="choose_day">Choose day</string>
     <string name="time">Time</string>
     <string name="location">Location</string>
+    <string name="class_name">Class Name</string>
+    <string name="description">Description</string>
 
 </resources>

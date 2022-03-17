@@ -69,10 +69,10 @@ class PlanFragment : Fragment() {
 
     private fun setUpClass() {
         val classes = listOf<ClassStudent>(
-            ClassStudent(6, "cc", true, "sunday", "12:00", "14:00", "Math"),
-            ClassStudent(7, "Mth", true, "monday", "1:00", "4:00", "Program"),
-            ClassStudent(2, "Psh", true, "Sunday", "10:00 ", "11:00", "Data structures"),
-            ClassStudent(6, "Gam", true, "sunday", "12:00", "14:00", "NetWork")
+            ClassStudent("Math", "cc", true, "sunday", "12:00", "14:00", "Math"),
+            ClassStudent("Math", "Mth", true, "monday", "1:00", "4:00", "Program"),
+            ClassStudent("Math", "Psh", true, "Sunday", "10:00 ", "11:00", "Data structures"),
+            ClassStudent("M", "Gam", true, "sunday", "12:00", "14:00", "NetWork")
         )
         adapterClassStudent =
             ClassStudentAdapter(classes, object : ClassStudentAdapter.OptionsMenuClickListener {
