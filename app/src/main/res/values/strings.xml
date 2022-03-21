@@ -53,5 +53,6 @@
     <string name="location">Location</string>
     <string name="class_name">Class Name</string>
     <string name="description">Description</string>
+    <string name="new_course">New Course</string>
 
 </resources>

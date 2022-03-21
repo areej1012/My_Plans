@@ -3,7 +3,10 @@ package com.example.myplans.activities
 import android.app.Activity
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
@@ -55,12 +58,30 @@ class AddClassesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddClassesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        title = ""
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
 
 
         binding.btCourse.setOnClickListener {
             showDialog(this)
         }
+    }
+
+
+    // for menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_meeting, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add -> {
+                saveDB()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
@@ -72,7 +93,7 @@ class AddClassesActivity : AppCompatActivity() {
         // declare button in alert
         val btDialogAdd = dialog.findViewById(R.id.btAddCourse) as Button
         btDialogAdd.setOnClickListener {
-            dialog.dismiss()
+            startActivity(Intent(this, AddCourseActivity::class.java))
         }
 
         // declare list view
@@ -87,4 +108,12 @@ class AddClassesActivity : AppCompatActivity() {
         }
         dialog.show()
     }
+
+
+    private fun saveDB() {
+
+
+    }
+
+
 }

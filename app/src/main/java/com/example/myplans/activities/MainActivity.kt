@@ -108,28 +108,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun alertSemester() {
+        // this is first time for using the app
         if (isFirst) {
+            //open alert to take semester
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.semester_alert)
             dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(false)
             val semesterNameLayout = dialog.findViewById<TextInputLayout>(R.id.etsemester)
-            val semeseterName = dialog.findViewById<TextInputEditText>(R.id.textInput)
+            val semesterName = dialog.findViewById<TextInputEditText>(R.id.textInput)
             val saveSemester = dialog.findViewById<Button>(R.id.saveSemester)
 
             dialog.show()
 
             saveSemester.setOnClickListener {
-                if (checkText(semeseterName.text.toString())) {
+                if (checkText(semesterName.text.toString())) {
                     semesterNameLayout.error = "Please fill in the semester name"
                 } else {
-                    // save name in database
+                    // save semester in database
                     val calendar = Calendar.getInstance()
                     val dateFormat = SimpleDateFormat("yyyy-mm-dd")
                     val startDate = dateFormat.format(calendar.time)
                     calendar.add(Calendar.MONTH, 3)
                     val endDate = dateFormat.format(calendar.time)
-                    val newSemester = Semester(semeseterName.text.toString(), startDate, endDate)
+                    val newSemester = Semester(semesterName.text.toString(), startDate, endDate)
 
                     CoroutineScope(IO).launch {
                         if (planDoa.insertSemester(newSemester) < 1)
@@ -140,7 +142,7 @@ class MainActivity : AppCompatActivity() {
 
                     //save in sharedPreferences
                     isFirst = false
-                    saveSharedPreferences(saveSemester.text.toString())
+                    saveSharedPreferences(semesterName.text.toString())
                     //done
                     dialog.dismiss()
                 }

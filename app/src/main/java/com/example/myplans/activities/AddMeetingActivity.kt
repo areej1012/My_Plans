@@ -113,10 +113,7 @@ class AddMeetingActivity : AppCompatActivity() {
                 else
                     Log.e("Save meeting", "sucsse")
                 finish()
-
             }
-
-
         }
     }
 

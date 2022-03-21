@@ -24,7 +24,7 @@ class GetStartedActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE
         )
-        //  checkIsFirstTime()
+          checkIsFirstTime()
 
         binding.getStarted.setOnClickListener {
             moveToNextActivity()

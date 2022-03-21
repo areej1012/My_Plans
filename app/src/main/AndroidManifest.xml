@@ -13,8 +13,12 @@
             android:name=".activities.AddMeetingActivity"
             android:label="@string/new_meeting"
             android:theme="@style/Theme.MyPlans.NoActionBar" />
-        <activity android:name=".activities.AddClassesActivity" />
-        <activity android:name=".activities.AddCourseActivity" />
+        <activity
+            android:name=".activities.AddClassesActivity"
+            android:theme="@style/Theme.MyPlans.NoActionBar" />
+        <activity
+            android:name=".activities.AddCourseActivity"
+            android:theme="@style/Theme.MyPlans.NoActionBar" />
         <activity
             android:name=".activities.GetStartedActivity"
             android:theme="@style/Theme.MyPlans.GetStarted">

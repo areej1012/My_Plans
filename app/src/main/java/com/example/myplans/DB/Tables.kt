@@ -16,7 +16,7 @@ data class Course(
     @PrimaryKey(autoGenerate = false)
     val nameCourse: String,
     val image: String?,
-    val description: String,
+    val description: String?,
     val fk_semester: String,
 )
 
