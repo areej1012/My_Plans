@@ -51,4 +51,7 @@
     <string name="class_name">اسم الصف</string>
     <string name="choose_your_course">أختر مادتك</string>
     <string name="add_a_new_course">إضافة مادة جديدة</string>
+    <string name="error_course">رجاءً أختار المادة</string>
+    <string name="error_day">رجاءً أختار اليوم</string>
+    <string name="error_time">رجاءً أختار الوقت</string>
 </resources>

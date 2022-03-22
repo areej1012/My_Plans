@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
@@ -161,6 +162,45 @@ class AddClassesActivity : AppCompatActivity() {
     }
 
     private fun validation() {
+        var isFillUp = false
+        if (binding.btCourse.text.equals(resources.getString(R.string.choose_course))) {
+            binding.tvErrorCourse.text = resources.getString(R.string.error_course)
+            binding.tvErrorCourse.visibility = View.VISIBLE
+        } else {
+            binding.tvErrorCourse.visibility = View.GONE
+            isFillUp = true
+        }
+
+        if (binding.btDate.text.equals(resources.getString(R.string.choose_day))) {
+            binding.tvErrorDay.text = resources.getString(R.string.error_day)
+            binding.tvErrorDay.visibility = View.VISIBLE
+            isFillUp = false
+        } else {
+            binding.tvErrorDay.visibility = View.GONE
+            isFillUp = true
+        }
+
+        if (binding.btTimeStart.text.equals(resources.getString(R.string.choose_time))) {
+            binding.tvErrorStart.text = resources.getString(R.string.error_time)
+            binding.tvErrorStart.visibility = View.VISIBLE
+            isFillUp = false
+        } else {
+            binding.tvErrorStart.visibility = View.GONE
+            isFillUp = true
+        }
+
+        if (binding.btTimeEnd.text.equals(resources.getString(R.string.choose_time))) {
+            binding.tvErrorEnd.text = resources.getString(R.string.error_time)
+            binding.tvErrorEnd.visibility = View.VISIBLE
+            isFillUp = false
+        } else {
+            binding.tvErrorEnd.visibility = View.GONE
+            isFillUp = true
+        }
+
+        if (isFillUp) {
+            Log.e("Db", "w")
+        }
 
     }
 

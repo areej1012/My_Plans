@@ -78,12 +78,25 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:backgroundTint="@color/white_sc"
-                    android:text="@string/choose_time"
+                    android:text="@string/choose_course"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tvErrorCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="TextView"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -104,12 +117,25 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:backgroundTint="@color/white_sc"
                     android:text="@string/choose_day"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tvErrorDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="TextView"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -130,12 +156,25 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:backgroundTint="@color/white_sc"
                     android:text="@string/choose_time"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tvErrorStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="TextView"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -156,12 +195,25 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:backgroundTint="@color/white_sc"
                     android:text="@string/choose_time"
                     android:textAlignment="textStart"
                     android:textAllCaps="false"
                     android:textColor="@color/gray" />
+
+                <TextView
+                    android:id="@+id/tvErrorEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/avenir_regular"
+                    android:text="TextView"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:visibility="gone" />
             </LinearLayout>
 
 
