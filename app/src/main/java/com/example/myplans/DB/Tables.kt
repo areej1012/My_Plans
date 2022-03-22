@@ -22,10 +22,8 @@ data class Course(
 
 @Entity(tableName = "classes")
 data class ClassStudent(
-    @PrimaryKey(autoGenerate = false)
-    val className: String,
-    val description: String,
-    val everyWeek: Boolean,
+    @PrimaryKey(autoGenerate = true)
+    val className: Int?,
     val day: String,
     val timeStart: String,
     val timeEnd: String,

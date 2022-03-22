@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase
     entities = [
         Semester::class,
         Course::class,
+        ClassStudent::class,
         Task::class,
         HomeWork::class,
         Quiz::class,

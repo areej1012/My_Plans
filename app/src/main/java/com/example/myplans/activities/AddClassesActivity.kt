@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -95,7 +96,7 @@ class AddClassesActivity : AppCompatActivity() {
                 }
             }
 
-            binding.btTimeStart.text = formattedTime
+            binding.btTimeEnd.text = formattedTime
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,6 +114,16 @@ class AddClassesActivity : AppCompatActivity() {
 
         binding.btDate.setOnClickListener {
             showDialogDay(this)
+        }
+
+        binding.btTimeStart.setOnClickListener {
+            val timePicker = TimePickerDialog(this, timerStartDialogListener, 8, 0, false)
+            timePicker.show()
+        }
+
+        binding.btTimeEnd.setOnClickListener {
+            val timePicker = TimePickerDialog(this, timerEndDialogListener, 9, 0, false)
+            timePicker.show()
         }
     }
 
@@ -143,10 +154,14 @@ class AddClassesActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add -> {
-                saveDB()
+                validation()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun validation() {
+
     }
 
 
@@ -187,6 +202,7 @@ class AddClassesActivity : AppCompatActivity() {
         listView.adapter = arrayAdapter
         listView.setOnItemClickListener { _, _, position, _ ->
             binding.btDate.text = arrayDays[position].toString()
+            Log.e("days", arrayDays[position].toString())
             dialog.dismiss()
         }
         dialog.show()
