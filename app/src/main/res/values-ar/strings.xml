@@ -41,4 +41,14 @@
     <string name="title">العنوان</string>
     <string name="location">الموقع</string>
     <string name="choose_day">أختار تاريخ</string>
+    <string name="sunday">الأحد</string>
+    <string name="monday">الأثنين</string>
+    <string name="tuesday">الثلاثاء</string>
+    <string name="wednesday">الأربعاء</string>
+    <string name="thursday">الخميس</string>
+    <string name="new_course">مادة جديدة</string>
+    <string name="choose_the_day">أختر اليوم</string>
+    <string name="class_name">اسم الصف</string>
+    <string name="choose_your_course">أختر مادتك</string>
+    <string name="add_a_new_course">إضافة مادة جديدة</string>
 </resources>

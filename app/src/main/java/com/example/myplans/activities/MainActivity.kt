@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                         if (planDoa.insertSemester(newSemester) < 1)
                             Log.e("Save", "Failed")
                         else
-                            Log.e("Save", "work")
+                            Log.e("Save", "Success")
                     }
 
                     //save in sharedPreferences

@@ -111,7 +111,7 @@ class AddMeetingActivity : AppCompatActivity() {
                 if (planDao.insertMeeting(newMeeting) < 1)
                     Log.e("Save meeting", "Failed")
                 else
-                    Log.e("Save meeting", "sucsse")
+                    Log.e("Save meeting", "Success")
                 finish()
             }
         }

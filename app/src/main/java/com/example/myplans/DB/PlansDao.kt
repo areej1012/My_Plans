@@ -20,6 +20,6 @@ interface PlansDao {
 
     @Transaction
     @Query("SELECT * FROM semester WHERE semester = :Semester")
-    fun getSemesterWithCourse(Semester: String): LiveData<List<SemesterWithCourses>>
+    fun getSemesterWithCourse(Semester: String): List<SemesterWithCourses>
 
 }

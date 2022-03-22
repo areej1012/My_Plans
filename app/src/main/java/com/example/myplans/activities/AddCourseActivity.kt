@@ -52,7 +52,6 @@ class AddCourseActivity : AppCompatActivity() {
 
     private fun getText() {
         val semester = sharedPreferences.getString("semester", "")
-        Log.e("semester name", semester!!)
         val nameCourse = binding.editTextCourse.text.toString().trim()
         var description = binding.editTextDescription.text.toString().trim()
         if (nameCourse.isEmpty())
@@ -71,7 +70,7 @@ class AddCourseActivity : AppCompatActivity() {
             if (planDao.insertCourse(newCourse) < 1)
                 Log.e("Save meeting", "Failed")
             else {
-                Log.e("Save meeting", "sucsse")
+                Log.e("Save course", "Success")
                 finish()
             }
         }
