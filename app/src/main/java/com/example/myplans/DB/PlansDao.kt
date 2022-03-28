@@ -30,4 +30,8 @@ interface PlansDao {
     @Query("SELECT * From course WHERE nameCourse = :courseName")
     fun getCourseWithClass(courseName: String): LiveData<List<CourseWithClass>>
 
+    @Transaction
+    @Query("SELECT * From classes")
+    fun getClassStudent(): LiveData<List<ClassStudent>>
+
 }

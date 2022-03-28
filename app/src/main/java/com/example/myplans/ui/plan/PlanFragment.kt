@@ -1,7 +1,6 @@
 package com.example.myplans.ui.plan
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -19,10 +18,11 @@ import com.example.myplans.databinding.FragmentPlanBinding
 class PlanFragment : Fragment() {
 
     private lateinit var binding: FragmentPlanBinding
-    private lateinit var adapterClassStudent: ClassStudentAdapter
     private lateinit var meetingAdapter: MeetingAdapter
+    private lateinit var classAdapter: ClassStudentAdapter
     private val viewModel by lazy { ViewModelProvider(this)[PlanViewModel::class.java] }
     private val meetingList = listOf<Meeting>()
+    private val classList = listOf<ClassStudent>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,9 +37,20 @@ class PlanFragment : Fragment() {
         binding.rvMeeting.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
 
+        classAdapter =
+            ClassStudentAdapter(classList, object : ClassStudentAdapter.OptionsMenuClickListener {
+                override fun onOptionsMenuClicked(position: Int) {
+                    performOptionsMenuClick(position, classList)
+                }
+
+            })
+
+        binding.rvClass.adapter = classAdapter
+        binding.rvClass.layoutManager = LinearLayoutManager(activity)
 
 
-        setUpClass()
+
+
         setUpHomeWork()
         setUpQuiz()
         setUpTask()
@@ -49,13 +60,13 @@ class PlanFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         setUpMeeting()
+        setUpClass()
     }
 
     private fun setUpMeeting() {
 
         activity?.let {
             viewModel.getMeetings().observe(it, { meeting ->
-                Log.e("meeting size", meeting.size.toString())
                 if (meeting.isNotEmpty()) {
                     binding.meeting.visibility = View.VISIBLE
                     binding.rvMeeting.visibility = View.VISIBLE
@@ -68,21 +79,16 @@ class PlanFragment : Fragment() {
     }
 
     private fun setUpClass() {
-        val classes = listOf<ClassStudent>(
-            ClassStudent(null, "sunday", "12:00", "14:00", "Math"),
-            ClassStudent(null, "monday", "1:00", "4:00", "Program"),
-            ClassStudent(null, "Sunday", "10:00 ", "11:00", "Data structures"),
-            ClassStudent(null, "sunday", "12:00", "14:00", "NetWork")
-        )
-        adapterClassStudent =
-            ClassStudentAdapter(classes, object : ClassStudentAdapter.OptionsMenuClickListener {
-                override fun onOptionsMenuClicked(position: Int) {
-                    performOptionsMenuClick(position, classes)
+        activity?.let {
+            viewModel.getClass().observe(it, { classStudent ->
+                if (classStudent.isNotEmpty()) {
+                    binding.linearLayoutClass.visibility = View.VISIBLE
+                    binding.rvClass.visibility = View.VISIBLE
+                    classAdapter.update(classStudent)
                 }
 
             })
-        binding.rvCourse.adapter = adapterClassStudent
-        binding.rvCourse.layoutManager = LinearLayoutManager(activity)
+        }
     }
 
     private fun setUpHomeWork() {
@@ -110,7 +116,7 @@ class PlanFragment : Fragment() {
         // create object of PopupMenu and pass context and view where we want
         // to show the popup menu
         val popupMenu =
-            PopupMenu(activity, binding.rvCourse[position].findViewById(R.id.textViewOptions))
+            PopupMenu(activity, binding.rvClass[position].findViewById(R.id.textViewOptions))
         // add the menu
         popupMenu.inflate(R.menu.course_menu)
 
@@ -120,7 +126,7 @@ class PlanFragment : Fragment() {
                     R.id.cancel_course_only -> {
                         // here are the logic to delete an item from the list
                         val tempLang = course[position]
-                        adapterClassStudent.notifyDataSetChanged()
+                        classAdapter.notifyDataSetChanged()
                         return true
                     }
                 }

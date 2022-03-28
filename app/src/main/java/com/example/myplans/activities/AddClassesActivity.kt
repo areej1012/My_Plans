@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myplans.DB.ClassStudent
 import com.example.myplans.DB.PlansDatabase
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityAddClassesBinding
@@ -33,6 +34,8 @@ class AddClassesActivity : AppCompatActivity() {
             val formattedTime: String = when {
                 hourOfDay == 0 -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 am"
                         "${hourOfDay + 12}:0${minute} am"
                     } else {
                         "${hourOfDay + 12}:${minute} am"
@@ -40,6 +43,8 @@ class AddClassesActivity : AppCompatActivity() {
                 }
                 hourOfDay > 12 -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 pm"
                         "${hourOfDay - 12}:0${minute} pm"
                     } else {
                         "${hourOfDay - 12}:${minute} pm"
@@ -47,6 +52,8 @@ class AddClassesActivity : AppCompatActivity() {
                 }
                 hourOfDay == 12 -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 pm"
                         "${hourOfDay}:0${minute} pm"
                     } else {
                         "${hourOfDay}:${minute} pm"
@@ -54,6 +61,8 @@ class AddClassesActivity : AppCompatActivity() {
                 }
                 else -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 am"
                         "${hourOfDay}:${minute} am"
                     } else {
                         "${hourOfDay}:${minute} am"
@@ -69,6 +78,8 @@ class AddClassesActivity : AppCompatActivity() {
             val formattedTime: String = when {
                 hourOfDay == 0 -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 am"
                         "${hourOfDay + 12}:0${minute} am"
                     } else {
                         "${hourOfDay + 12}:${minute} am"
@@ -76,6 +87,8 @@ class AddClassesActivity : AppCompatActivity() {
                 }
                 hourOfDay > 12 -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 pm"
                         "${hourOfDay - 12}:0${minute} pm"
                     } else {
                         "${hourOfDay - 12}:${minute} pm"
@@ -83,6 +96,8 @@ class AddClassesActivity : AppCompatActivity() {
                 }
                 hourOfDay == 12 -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 pm"
                         "${hourOfDay}:0${minute} pm"
                     } else {
                         "${hourOfDay}:${minute} pm"
@@ -90,6 +105,8 @@ class AddClassesActivity : AppCompatActivity() {
                 }
                 else -> {
                     if (minute < 10) {
+                        if (minute == 0)
+                            "${hourOfDay}:00 am"
                         "${hourOfDay}:${minute} am"
                     } else {
                         "${hourOfDay}:${minute} am"
@@ -123,7 +140,7 @@ class AddClassesActivity : AppCompatActivity() {
         }
 
         binding.btTimeEnd.setOnClickListener {
-            val timePicker = TimePickerDialog(this, timerEndDialogListener, 9, 0, false)
+            val timePicker = TimePickerDialog(this, timerEndDialogListener, 10, 0, false)
             timePicker.show()
         }
     }
@@ -166,6 +183,7 @@ class AddClassesActivity : AppCompatActivity() {
         if (binding.btCourse.text.equals(resources.getString(R.string.choose_course))) {
             binding.tvErrorCourse.text = resources.getString(R.string.error_course)
             binding.tvErrorCourse.visibility = View.VISIBLE
+            isFillUp = false
         } else {
             binding.tvErrorCourse.visibility = View.GONE
             isFillUp = true
@@ -199,7 +217,7 @@ class AddClassesActivity : AppCompatActivity() {
         }
 
         if (isFillUp) {
-            Log.e("Db", "w")
+            saveDB()
         }
 
     }
@@ -250,8 +268,21 @@ class AddClassesActivity : AppCompatActivity() {
 
 
     private fun saveDB() {
+        val day = binding.btDate.text.toString().trim()
+        val timeStart = binding.btTimeStart.text.toString().trim()
+        val timeEnd = binding.btTimeEnd.text.toString().trim()
+        val courseName = binding.btCourse.text.toString().trim()
+        val newClass = ClassStudent(null, day, timeStart, timeEnd, courseName)
 
+        CoroutineScope(IO).launch {
+            if (planDao.insertClass(newClass) < 1) {
+                Log.i("Save meeting", "Failed")
+            } else {
+                Log.e("Save course", "Success")
+                finish()
+            }
 
+        }
     }
 
     override fun onPause() {

@@ -10,6 +10,7 @@
     tools:context=".ui.plan.PlanFragment">
 
     <LinearLayout
+        android:id="@+id/LinearClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -40,12 +41,13 @@
             android:visibility="gone"
             tools:listitem="@layout/card_cell_meeting" />
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linearLayoutClass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -53,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/avenir_regular"
-                android:text="@string/your_course"
+                android:text="@string/your_class"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -69,12 +71,13 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCourse"
+            android:id="@+id/rvClass"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"

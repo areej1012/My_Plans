@@ -21,4 +21,8 @@ class Repository(private val planDoa: PlansDao) {
     fun getMeetings(timeNow: String): LiveData<List<Meeting>> {
         return planDoa.getMeeting()
     }
+
+    fun getClassStudent(): LiveData<List<ClassStudent>> {
+        return planDoa.getClassStudent()
+    }
 }

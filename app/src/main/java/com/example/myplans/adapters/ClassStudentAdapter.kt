@@ -7,11 +7,13 @@ import com.example.myplans.DB.ClassStudent
 import com.example.myplans.databinding.CardCellClassBinding
 
 class ClassStudentAdapter(
-    private val listCourse: List<ClassStudent>,
-    var optionsMenuClickListener: OptionsMenuClickListener
+    private var listClass: List<ClassStudent>,
+    private var optionsMenuClickListener: OptionsMenuClickListener
 ) :
     RecyclerView.Adapter<ClassStudentAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellClassBinding) : RecyclerView.ViewHolder(binding.root)
+
+    private val limit = 3
 
     // so that we can handle data most effectively in PlanFragment.kt
     interface OptionsMenuClickListener {
@@ -29,7 +31,7 @@ class ClassStudentAdapter(
     }
 
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
-        val classes = listCourse[position]
+        val classes = listClass[position]
         holder.binding.apply {
             tvCourse.text = classes.fk_nameCourse
             tvDate.text = classes.day
@@ -42,6 +44,16 @@ class ClassStudentAdapter(
         }
     }
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int {
+        return if (listClass.size > limit)
+            limit
+        else
+            listClass.size
+    }
+
+    fun update(newList: List<ClassStudent>) {
+        listClass = newList
+        notifyDataSetChanged()
+    }
 }
 
