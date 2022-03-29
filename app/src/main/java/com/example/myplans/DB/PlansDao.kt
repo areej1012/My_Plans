@@ -19,8 +19,8 @@ interface PlansDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertClass(newClass: ClassStudent): Long
 
-    @Query("SELECT * From meeting")
-    fun getMeeting(): LiveData<List<Meeting>>
+    @Query("SELECT * From meeting WHERE day >= :day AND month >= :month")
+    fun getMeeting(day: String, month: String): LiveData<List<Meeting>>
 
     @Transaction
     @Query("SELECT * FROM semester WHERE semester = :Semester")

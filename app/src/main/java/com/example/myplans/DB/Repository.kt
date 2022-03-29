@@ -5,21 +5,21 @@ import androidx.lifecycle.LiveData
 class Repository(private val planDoa: PlansDao) {
     // val getClass: LiveData<List<SemesterWithCourses>> = planDoa.getSemesterWithCourse(semesterName!!)
 
-    suspend fun insertSemester(newSemester: Semester) {
+    fun insertSemester(newSemester: Semester) {
         planDoa.insertSemester(newSemester)
     }
 
-    suspend fun insertCourse(newCourse: Course) {
+    fun insertCourse(newCourse: Course) {
         planDoa.insertCourse(newCourse)
     }
 
 
-    suspend fun insertMeeting(newMeeting: Meeting) {
+    fun insertMeeting(newMeeting: Meeting) {
         planDoa.insertMeeting(newMeeting)
     }
 
-    fun getMeetings(timeNow: String): LiveData<List<Meeting>> {
-        return planDoa.getMeeting()
+    fun getMeetings(day: String, month: String): LiveData<List<Meeting>> {
+        return planDoa.getMeeting(day, month)
     }
 
     fun getClassStudent(): LiveData<List<ClassStudent>> {

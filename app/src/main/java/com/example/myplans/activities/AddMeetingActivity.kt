@@ -1,6 +1,5 @@
 package com.example.myplans.activities
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Build
@@ -77,7 +76,8 @@ class AddMeetingActivity : AppCompatActivity() {
         initDatePicker()
 
         binding.btTime.setOnClickListener {
-            val timePicker = TimePickerDialog(this, timePickerDialogListener, 12, 0, false)
+            val timePicker =
+                TimePickerDialog(this, R.style.Theme_Dialog, timePickerDialogListener, 12, 0, false)
             timePicker.show()
         }
         binding.btDate.setOnClickListener {
@@ -114,6 +114,7 @@ class AddMeetingActivity : AppCompatActivity() {
                     Log.e("Save meeting", "Success")
                 finish()
             }
+
         }
     }
 
@@ -121,20 +122,19 @@ class AddMeetingActivity : AppCompatActivity() {
     private fun initDatePicker() {
         val dateListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
             val date = makeDateString(day, month, year)
-            Log.e("month", month.toString())
             binding.btDate.text = date
             this.day = "$day"
             this.month = "$month"
             this.year = "$year"
-            Log.e("day", getMonthFormat(month))
         }
 
         val cel = Calendar.getInstance()
         val year = cel.get(Calendar.YEAR)
         val month = cel.get(Calendar.MONTH)
         val day = cel.get(Calendar.DAY_OF_MONTH)
-        val style = AlertDialog.THEME_HOLO_LIGHT
-        datePickerDialog = DatePickerDialog(this, style, dateListener, year, month, day)
+
+        datePickerDialog =
+            DatePickerDialog(this, R.style.Theme_Dialog, dateListener, year, month, day)
 
 
     }

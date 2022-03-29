@@ -11,7 +11,6 @@
     <string name="calendar">التقويم</string>
     <string name="week">الأسبوع</string>
     <string name="meeting">الأجتماعات</string>
-    <string name="your_course">موادك الدراسية</string>
     <string name="see_more">شاهد المزيد</string>
     <string name="your_homework">واجباتك</string>
     <string name="your_task">مهامك</string>
@@ -54,4 +53,5 @@
     <string name="error_course">رجاءً أختار المادة</string>
     <string name="error_day">رجاءً أختار اليوم</string>
     <string name="error_time">رجاءً أختار الوقت</string>
+    <string name="your_class">حصصك</string>
 </resources>

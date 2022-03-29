@@ -1,13 +1,13 @@
 package com.example.myplans.ui.plan
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.example.myplans.DB.ClassStudent
 import com.example.myplans.DB.Meeting
 import com.example.myplans.DB.PlansDatabase
 import com.example.myplans.DB.Repository
-import java.text.SimpleDateFormat
 import java.util.*
 
 class PlanViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,9 +20,10 @@ class PlanViewModel(application: Application) : AndroidViewModel(application) {
         val planDao = PlansDatabase.getDatabase(application).plansDao()
         repository = Repository(planDao)
         val cel = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("dd-mm-yyyy")
-        val timeNow = dateFormat.format(cel.time)
-        meetings = repository.getMeetings(timeNow)
+        val day = cel.get(Calendar.DAY_OF_MONTH)
+        val month = cel.get(Calendar.MONTH)
+        Log.d("PlanViewModel Month", month.toString())
+        meetings = repository.getMeetings(day.toString(), month.toString())
         listClass = repository.getClassStudent()
 
 

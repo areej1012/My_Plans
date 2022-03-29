@@ -1,6 +1,7 @@
 package com.example.myplans.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myplans.DB.Meeting
@@ -33,9 +34,12 @@ class MeetingAdapter(private var meetingList: List<Meeting>) :
 
             tvTitle.text = meeting.title
             tvTime.text = meeting.time
-            tvLocation.text = meeting.location
             tvDay.text = meeting.day
             tvMonth.text = getMonthFormat(Integer.parseInt(meeting.month))
+            if (meeting.location.isNullOrEmpty())
+                tvLocation.visibility = View.INVISIBLE
+            else
+                tvLocation.text = meeting.location
 
         }
     }

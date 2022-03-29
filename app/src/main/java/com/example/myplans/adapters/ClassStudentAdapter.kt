@@ -1,5 +1,6 @@
 package com.example.myplans.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@ class ClassStudentAdapter(
     RecyclerView.Adapter<ClassStudentAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellClassBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val limit = 3
+    private val limit = 2
 
     // so that we can handle data most effectively in PlanFragment.kt
     interface OptionsMenuClickListener {
@@ -30,6 +31,7 @@ class ClassStudentAdapter(
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
         val classes = listClass[position]
         holder.binding.apply {

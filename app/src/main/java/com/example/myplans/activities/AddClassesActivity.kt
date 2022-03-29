@@ -135,12 +135,14 @@ class AddClassesActivity : AppCompatActivity() {
         }
 
         binding.btTimeStart.setOnClickListener {
-            val timePicker = TimePickerDialog(this, timerStartDialogListener, 8, 0, false)
+            val timePicker =
+                TimePickerDialog(this, R.style.Theme_Dialog, timerStartDialogListener, 8, 0, false)
             timePicker.show()
         }
 
         binding.btTimeEnd.setOnClickListener {
-            val timePicker = TimePickerDialog(this, timerEndDialogListener, 10, 0, false)
+            val timePicker =
+                TimePickerDialog(this, R.style.Theme_Dialog, timerEndDialogListener, 10, 0, false)
             timePicker.show()
         }
     }
