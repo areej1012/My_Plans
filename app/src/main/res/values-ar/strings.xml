@@ -54,4 +54,5 @@
     <string name="error_day">رجاءً أختار اليوم</string>
     <string name="error_time">رجاءً أختار الوقت</string>
     <string name="your_class">حصصك</string>
+    <string name="new_homework">واجب جديد</string>
 </resources>

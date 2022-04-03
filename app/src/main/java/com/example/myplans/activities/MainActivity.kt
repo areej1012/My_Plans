@@ -105,6 +105,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddMeetingActivity::class.java))
         }
 
+        binding.includedContent.addHW.setOnClickListener {
+            startActivity(Intent(this, AddHomeWorkActivity::class.java))
+        }
+
     }
 
     private fun alertSemester() {
@@ -150,6 +154,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //validation
     private fun checkText(text: String): Boolean {
         return text.isEmpty()
     }

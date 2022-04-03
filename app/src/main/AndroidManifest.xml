@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPlans">
+        <activity android:name=".activities.AddHomeWorkActivity"></activity>
         <activity
             android:name=".activities.AddMeetingActivity"
             android:label="@string/new_meeting"
