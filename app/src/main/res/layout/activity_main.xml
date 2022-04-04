@@ -17,7 +17,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/white_sc"
             app:popupTheme="@style/Theme.MyPlans.PopupOverlay"
-            app:title="Day"
+            app:title="@string/day"
             app:titleTextColor="@color/black" />
 
     </com.google.android.material.appbar.AppBarLayout>
