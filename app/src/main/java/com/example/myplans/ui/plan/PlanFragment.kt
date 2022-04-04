@@ -92,7 +92,8 @@ class PlanFragment : Fragment() {
     }
 
     private fun setUpHomeWork() {
-        val homeWork = listOf<HomeWork>(HomeWork(5, "Project", "uh", true, "15 Oct", 9))
+        val homeWork =
+            listOf<HomeWork>(HomeWork(null, "Project", "uh", "7", "15 Oct", "9", "", "", "", ""))
         binding.rvHW.adapter = HomeWorkAdapter(homeWork)
         binding.rvHW.layoutManager = LinearLayoutManager(activity)
     }

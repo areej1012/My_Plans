@@ -24,7 +24,7 @@ class HomeWorkAdapter(val homeWorkList: List<HomeWork>) :
         val homeWork = homeWorkList[position]
         holder.binding.apply {
             tvCourse.text = "course"
-            tvDate.text = homeWork.date
+            tvDate.text = homeWork.day
             tvTitle.text = homeWork.title
         }
     }

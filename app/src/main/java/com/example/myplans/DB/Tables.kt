@@ -15,7 +15,6 @@ data class Semester(
 data class Course(
     @PrimaryKey(autoGenerate = false)
     val nameCourse: String,
-    val image: String?,
     val description: String?,
     val fk_semester: String,
 )
@@ -23,7 +22,7 @@ data class Course(
 @Entity(tableName = "classes")
 data class ClassStudent(
     @PrimaryKey(autoGenerate = true)
-    val className: Int?,
+    val pk: Int?,
     val day: String,
     val timeStart: String,
     val timeEnd: String,
@@ -43,12 +42,16 @@ data class Task(
 
 @Entity(tableName = "home_work")
 data class HomeWork(
-    @PrimaryKey(autoGenerate = true) val pk: Int,
+    @PrimaryKey(autoGenerate = true) val pk: Int?,
     val title: String,
-    val description: String,
-    val isReminder: Boolean,
-    val date: String,
-    val fk: Int
+    val description: String?,
+    val day: String,
+    val month: String,
+    val year: String,
+    val dayReminder: String?,
+    val monthReminder: String?,
+    val yearReminder: String?,
+    val fk_nameCourse: String
 )
 
 @Entity(tableName = "quiz")

@@ -64,7 +64,7 @@ class AddCourseActivity : AppCompatActivity() {
     }
 
     private fun saveDB(semester: String?, nameCourse: String, description: String) {
-        val newCourse = Course(nameCourse, "", description, semester!!)
+        val newCourse = Course(nameCourse, description, semester!!)
 
         CoroutineScope(IO).launch {
             if (planDao.insertCourse(newCourse) < 1)
