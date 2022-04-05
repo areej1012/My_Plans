@@ -25,4 +25,8 @@ class Repository(private val planDoa: PlansDao) {
     fun getClassStudent(): LiveData<List<ClassStudent>> {
         return planDoa.getClassStudent()
     }
+
+    fun getHomeWork(day: String, month: String): LiveData<List<HomeWork>> {
+        return planDoa.getHomeWork()
+    }
 }

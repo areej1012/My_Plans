@@ -6,9 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myplans.DB.HomeWork
 import com.example.myplans.databinding.CardCellHomworkBinding
 
-class HomeWorkAdapter(val homeWorkList: List<HomeWork>) :
+class HomeWorkAdapter(private var homeWorkList: List<HomeWork>) :
     RecyclerView.Adapter<HomeWorkAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellHomworkBinding) : RecyclerView.ViewHolder(binding.root)
+
+    private val limit = 2
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderItem {
         return HolderItem(
@@ -23,11 +25,22 @@ class HomeWorkAdapter(val homeWorkList: List<HomeWork>) :
     override fun onBindViewHolder(holder: HolderItem, position: Int) {
         val homeWork = homeWorkList[position]
         holder.binding.apply {
-            tvCourse.text = "course"
-            tvDate.text = homeWork.day
+            tvCourse.text = homeWork.fk_nameCourse
             tvTitle.text = homeWork.title
+            tvDate.text = "${homeWork.day}-${homeWork.month}-${homeWork.year}"
+
         }
     }
 
-    override fun getItemCount(): Int = homeWorkList.size
+    override fun getItemCount(): Int {
+        return if (homeWorkList.size > limit)
+            limit
+        else
+            homeWorkList.size
+    }
+
+    fun update(newList: List<HomeWork>) {
+        homeWorkList = newList
+        notifyDataSetChanged()
+    }
 }

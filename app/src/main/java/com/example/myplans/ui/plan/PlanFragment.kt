@@ -20,9 +20,11 @@ class PlanFragment : Fragment() {
     private lateinit var binding: FragmentPlanBinding
     private lateinit var meetingAdapter: MeetingAdapter
     private lateinit var classAdapter: ClassStudentAdapter
+    private lateinit var homeWorkAdapter: HomeWorkAdapter
     private val viewModel by lazy { ViewModelProvider(this)[PlanViewModel::class.java] }
     private val meetingList = listOf<Meeting>()
     private val classList = listOf<ClassStudent>()
+    private val homeWorkList = listOf<HomeWork>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,10 +50,11 @@ class PlanFragment : Fragment() {
         binding.rvClass.adapter = classAdapter
         binding.rvClass.layoutManager = LinearLayoutManager(activity)
 
+        homeWorkAdapter = HomeWorkAdapter(homeWorkList)
+        binding.rvHW.adapter = homeWorkAdapter
+        binding.rvHW.layoutManager = LinearLayoutManager(activity)
 
 
-
-        setUpHomeWork()
         setUpQuiz()
         setUpTask()
         return root
@@ -61,6 +64,7 @@ class PlanFragment : Fragment() {
         super.onStart()
         setUpMeeting()
         setUpClass()
+        setUpHomeWork()
     }
 
     private fun setUpMeeting() {
@@ -92,10 +96,15 @@ class PlanFragment : Fragment() {
     }
 
     private fun setUpHomeWork() {
-        val homeWork =
-            listOf<HomeWork>(HomeWork(null, "Project", "uh", "7", "15 Oct", "9", "", "", "", ""))
-        binding.rvHW.adapter = HomeWorkAdapter(homeWork)
-        binding.rvHW.layoutManager = LinearLayoutManager(activity)
+        activity?.let {
+            viewModel.getHomeWork().observe(it, { homeWorks ->
+                if (homeWorks.isNotEmpty()) {
+                    binding.linearLayoutHome.visibility = View.VISIBLE
+                    binding.rvHW.visibility = View.VISIBLE
+                    homeWorkAdapter.update(homeWorks)
+                }
+            })
+        }
     }
 
     private fun setUpQuiz() {

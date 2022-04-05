@@ -1,19 +1,16 @@
 package com.example.myplans.ui.plan
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.myplans.DB.ClassStudent
-import com.example.myplans.DB.Meeting
-import com.example.myplans.DB.PlansDatabase
-import com.example.myplans.DB.Repository
+import com.example.myplans.DB.*
 import java.util.*
 
 class PlanViewModel(application: Application) : AndroidViewModel(application) {
 
     private var meetings: LiveData<List<Meeting>>
     private var listClass: LiveData<List<ClassStudent>>
+    private val listHomeWorks: LiveData<List<HomeWork>>
     private val repository: Repository
 
     init {
@@ -22,9 +19,9 @@ class PlanViewModel(application: Application) : AndroidViewModel(application) {
         val cel = Calendar.getInstance()
         val day = cel.get(Calendar.DAY_OF_MONTH)
         val month = cel.get(Calendar.MONTH)
-        Log.d("PlanViewModel Month", month.toString())
         meetings = repository.getMeetings(day.toString(), month.toString())
         listClass = repository.getClassStudent()
+        listHomeWorks = repository.getHomeWork(day.toString(), month.toString())
 
 
     }
@@ -35,6 +32,10 @@ class PlanViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getClass(): LiveData<List<ClassStudent>> {
         return listClass
+    }
+
+    fun getHomeWork(): LiveData<List<HomeWork>> {
+        return listHomeWorks
     }
 
 }

@@ -19,6 +19,9 @@ interface PlansDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertClass(newClass: ClassStudent): Long
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertHomeWork(newHomeWork: HomeWork): Long
+
     @Query("SELECT * From meeting WHERE day >= :day AND month >= :month")
     fun getMeeting(day: String, month: String): LiveData<List<Meeting>>
 
@@ -33,5 +36,9 @@ interface PlansDao {
     @Transaction
     @Query("SELECT * From classes")
     fun getClassStudent(): LiveData<List<ClassStudent>>
+
+    @Transaction
+    @Query("SELECT * From home_work")
+    fun getHomeWork(): LiveData<List<HomeWork>>
 
 }
