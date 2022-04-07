@@ -14,7 +14,7 @@ class ClassStudentAdapter(
     RecyclerView.Adapter<ClassStudentAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellClassBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val limit = 2
+    private val limit = 3
 
     // so that we can handle data most effectively in PlanFragment.kt
     interface OptionsMenuClickListener {

@@ -58,6 +58,9 @@ class AddHomeWorkActivity : AppCompatActivity() {
         binding.btDate.setOnClickListener {
             openPicker()
         }
+        binding.btReminder.setOnClickListener {
+            openPickerReminder()
+        }
 
     }
 
@@ -93,7 +96,7 @@ class AddHomeWorkActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun initDatePicker() {
-        val dateListener = DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
+        val dateListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             val date = makeDateString(day, month, year)
             binding.btDate.text = date
             this.day = "$day"
@@ -113,9 +116,9 @@ class AddHomeWorkActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     private fun initDatePickerReminder() {
         val dateListenerReminder =
-            DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
+            DatePickerDialog.OnDateSetListener { _, year, month, day ->
                 val date = makeDateString(day, month, year)
-                binding.btDate.text = date
+                binding.btReminder.text = date
                 this.dayReminder = "$day"
                 this.monthReminder = "$month"
                 this.yearReminder = "$year"
@@ -126,18 +129,17 @@ class AddHomeWorkActivity : AppCompatActivity() {
         val month = cel.get(Calendar.MONTH)
         val day = cel.get(Calendar.DAY_OF_MONTH)
 
-        datePickerDialog =
+        datePickerDialogReminder =
             DatePickerDialog(this, R.style.Theme_Dialog, dateListenerReminder, year, month, day)
     }
 
     private fun validation() {
         if (binding.editTextCourse.text.toString().isEmpty())
             binding.textLyNTitle.error = resources.getString(R.string.fill_title)
-        else if (binding.btCourse.text.toString()
-                .equals(resources.getString(R.string.choose_course))
+        else if (binding.btCourse.text.toString() == resources.getString(R.string.choose_course)
         )
             binding.tvErrorCourse.text = resources.getText(R.string.error_course)
-        else if (binding.btDate.text.toString().equals(resources.getString(R.string.choose_date)))
+        else if (binding.btDate.text.toString() == resources.getString(R.string.choose_date))
             binding.tvErrorDate.text = resources.getString(R.string.error_date)
         else
             saveDB()

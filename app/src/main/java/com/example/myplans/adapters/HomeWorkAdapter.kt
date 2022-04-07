@@ -10,7 +10,7 @@ class HomeWorkAdapter(private var homeWorkList: List<HomeWork>) :
     RecyclerView.Adapter<HomeWorkAdapter.HolderItem>() {
     class HolderItem(val binding: CardCellHomworkBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val limit = 2
+    private val limit = 3
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderItem {
         return HolderItem(
@@ -27,10 +27,29 @@ class HomeWorkAdapter(private var homeWorkList: List<HomeWork>) :
         holder.binding.apply {
             tvCourse.text = homeWork.fk_nameCourse
             tvTitle.text = homeWork.title
-            tvDate.text = "${homeWork.day}-${homeWork.month}-${homeWork.year}"
+            tvDate.text = "${homeWork.day} ${getMonthFormat(Integer.parseInt(homeWork.month))}"
 
         }
     }
+
+    private fun getMonthFormat(month: Int): String {
+        when (month) {
+            0 -> return "Jan"
+            1 -> return "Feb"
+            2 -> return "Mar"
+            3 -> return "Apr"
+            4 -> return "May"
+            5 -> return "June"
+            6 -> return "July"
+            7 -> return "Aug"
+            8 -> return "Sept"
+            9 -> return "Oct"
+            10 -> return "Nov"
+            11 -> return "Dec"
+        }
+        return "Jan"
+    }
+
 
     override fun getItemCount(): Int {
         return if (homeWorkList.size > limit)
