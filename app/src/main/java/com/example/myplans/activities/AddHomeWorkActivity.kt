@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
@@ -134,15 +135,20 @@ class AddHomeWorkActivity : AppCompatActivity() {
     }
 
     private fun validation() {
-        if (binding.editTextCourse.text.toString().isEmpty())
-            binding.textLyNTitle.error = resources.getString(R.string.fill_title)
-        else if (binding.btCourse.text.toString() == resources.getString(R.string.choose_course)
-        )
-            binding.tvErrorCourse.text = resources.getText(R.string.error_course)
-        else if (binding.btDate.text.toString() == resources.getString(R.string.choose_date))
-            binding.tvErrorDate.text = resources.getString(R.string.error_date)
-        else
-            saveDB()
+        when {
+            binding.editTextCourse.text.toString().isEmpty() -> binding.textLyNTitle.error =
+                resources.getString(R.string.fill_title)
+            binding.btCourse.text.toString() == resources.getString(R.string.choose_course) -> {
+                binding.tvErrorCourse.text = resources.getText(R.string.error_course)
+                binding.tvErrorDate.visibility = View.VISIBLE
+            }
+
+            binding.btDate.text.toString() == resources.getString(R.string.choose_date) -> {
+                binding.tvErrorDate.text = resources.getString(R.string.error_date)
+                binding.tvErrorDate.visibility = View.VISIBLE
+            }
+            else -> saveDB()
+        }
     }
 
     private fun saveDB() {
