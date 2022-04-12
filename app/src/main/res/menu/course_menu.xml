@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/update_course"
+        android:id="@+id/updatee"
         android:title="@string/update" />
     <item
-        android:id="@+id/cancel_course_only"
-        android:title="@string/cancel_this_course_only" />
-    <item
-        android:id="@+id/cancel_courses"
-        android:title="@string/cancel_all" />
+        android:id="@+id/delete"
+        android:title="@string/delete" />
 </menu>

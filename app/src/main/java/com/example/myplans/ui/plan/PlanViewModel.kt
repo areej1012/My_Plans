@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.example.myplans.DB.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class PlanViewModel(application: Application) : AndroidViewModel(application) {
@@ -36,6 +39,12 @@ class PlanViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getHomeWork(): LiveData<List<HomeWork>> {
         return listHomeWorks
+    }
+
+    fun deleteNote(classStudent: ClassStudent) {
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.deleteClass(classStudent)
+        }
     }
 
 }

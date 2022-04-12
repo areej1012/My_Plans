@@ -23,7 +23,8 @@ class PlanFragment : Fragment() {
     private lateinit var homeWorkAdapter: HomeWorkAdapter
     private val viewModel by lazy { ViewModelProvider(this)[PlanViewModel::class.java] }
     private val meetingList = listOf<Meeting>()
-    private val classList = listOf<ClassStudent>()
+    private var isTherePlan = false
+    private var classList = listOf<ClassStudent>()
     private val homeWorkList = listOf<HomeWork>()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +39,7 @@ class PlanFragment : Fragment() {
         binding.rvMeeting.adapter = meetingAdapter
         binding.rvMeeting.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, true)
+        setUpMeeting()
 
         classAdapter =
             ClassStudentAdapter(classList, object : ClassStudentAdapter.OptionsMenuClickListener {
@@ -49,22 +51,23 @@ class PlanFragment : Fragment() {
 
         binding.rvClass.adapter = classAdapter
         binding.rvClass.layoutManager = LinearLayoutManager(activity)
+        setUpClass()
 
         homeWorkAdapter = HomeWorkAdapter(homeWorkList)
         binding.rvHW.adapter = homeWorkAdapter
         binding.rvHW.layoutManager = LinearLayoutManager(activity)
 
+        setUpHomeWork()
 
-        setUpQuiz()
-        setUpTask()
+        statePlans()
+        //  setUpQuiz()
+        //   setUpTask()
         return root
     }
 
     override fun onStart() {
         super.onStart()
-        setUpMeeting()
-        setUpClass()
-        setUpHomeWork()
+
     }
 
     private fun setUpMeeting() {
@@ -75,6 +78,7 @@ class PlanFragment : Fragment() {
                     binding.meeting.visibility = View.VISIBLE
                     binding.rvMeeting.visibility = View.VISIBLE
                     meetingAdapter.update(meeting)
+                    isTherePlan = true
                 }
             }
             )
@@ -89,6 +93,8 @@ class PlanFragment : Fragment() {
                     binding.linearLayoutClass.visibility = View.VISIBLE
                     binding.rvClass.visibility = View.VISIBLE
                     classAdapter.update(classStudent)
+                    classList = classStudent
+                    isTherePlan = true
                 }
 
             })
@@ -102,6 +108,7 @@ class PlanFragment : Fragment() {
                     binding.linearLayoutHome.visibility = View.VISIBLE
                     binding.rvHW.visibility = View.VISIBLE
                     homeWorkAdapter.update(homeWorks)
+                    isTherePlan = true
                 }
             })
         }
@@ -133,9 +140,9 @@ class PlanFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when (item?.itemId) {
-                    R.id.cancel_course_only -> {
+                    R.id.delete -> {
                         // here are the logic to delete an item from the list
-                        val tempLang = course[position]
+                        viewModel.deleteNote(classList[position])
                         classAdapter.notifyDataSetChanged()
                         return true
                     }
@@ -144,5 +151,12 @@ class PlanFragment : Fragment() {
             }
         })
         popupMenu.show()
+    }
+
+    private fun statePlans() {
+        if (isTherePlan) {
+            binding.imageView.visibility = View.INVISIBLE
+            binding.tv.visibility = View.INVISIBLE
+        }
     }
 }

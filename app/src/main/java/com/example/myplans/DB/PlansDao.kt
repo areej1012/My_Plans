@@ -41,4 +41,7 @@ interface PlansDao {
     @Query("SELECT * From home_work")
     fun getHomeWork(): LiveData<List<HomeWork>>
 
+    @Delete
+    fun deleteClass(classStudent: ClassStudent)
+
 }

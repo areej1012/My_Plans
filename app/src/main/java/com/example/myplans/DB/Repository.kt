@@ -29,4 +29,8 @@ class Repository(private val planDoa: PlansDao) {
     fun getHomeWork(day: String, month: String): LiveData<List<HomeWork>> {
         return planDoa.getHomeWork()
     }
+
+    suspend fun deleteClass(classStudent: ClassStudent) {
+        planDoa.deleteClass(classStudent)
+    }
 }

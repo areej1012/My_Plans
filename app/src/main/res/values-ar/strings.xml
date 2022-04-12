@@ -59,4 +59,5 @@
     <string name="add_reminder">إضافة تذكير</string>
     <string name="fill_title">رجاءً أملأ العنوان</string>
     <string name="error_date">رجاءً أختر التاريخ</string>
+    <string name="delete">حذف</string>
 </resources>
