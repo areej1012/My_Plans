@@ -15,18 +15,15 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.myplans.DB.ClassStudent
-import com.example.myplans.DB.PlansDatabase
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityAddClassesBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 
 class AddClassesActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddClassesBinding
     private var listNameCourse: MutableList<String> = mutableListOf()
-    private val planDao by lazy { PlansDatabase.getDatabase(this).plansDao() }
+    private val viewModel by lazy { ViewModelProvider(this)[ViewModel::class.java] }
     lateinit var sharedPreferences: SharedPreferences
     private val timerStartDialogListener: TimePickerDialog.OnTimeSetListener =
         TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute -> // logic to properly handle
@@ -150,19 +147,17 @@ class AddClassesActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         sharedPreferences =
             this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val semester = sharedPreferences.getString("semester", "")
-        CoroutineScope(IO).launch {
-            val arraySemesterWithCourse = planDao.getSemesterWithCourse(semester!!)
 
-            val listCourse = arraySemesterWithCourse[0].courses
-            for (course in listCourse) {
-                listNameCourse.add(course.nameCourse)
+        val arraySemesterWithCourse = viewModel.getSemesterWithCourse(semester!!)
+
+        arraySemesterWithCourse.observe(this, { semesterList ->
+            for (course in semesterList) {
+                listNameCourse.add(course.courses[0].nameCourse)
             }
-        }
-
+        })
     }
 
     // for menu
@@ -276,15 +271,11 @@ class AddClassesActivity : AppCompatActivity() {
         val courseName = binding.btCourse.text.toString().trim()
         val newClass = ClassStudent(null, day, timeStart, timeEnd, courseName)
 
-        CoroutineScope(IO).launch {
-            if (planDao.insertClass(newClass) < 1) {
-                Log.i("Save meeting", "Failed")
-            } else {
-                Log.e("Save course", "Success")
-                finish()
-            }
 
-        }
+        viewModel.insertClass(newClass)
+        finish()
+
+
     }
 
     override fun onPause() {

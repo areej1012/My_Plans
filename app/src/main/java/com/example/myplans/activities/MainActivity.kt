@@ -7,16 +7,14 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.example.myplans.DB.PlansDatabase
+import androidx.lifecycle.ViewModelProvider
 import com.example.myplans.DB.Semester
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityMainBinding
@@ -27,9 +25,6 @@ import com.example.myplans.ui.setting.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,9 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var bottmNav: BottomNavigationView
     private lateinit var sharedPreferences: SharedPreferences
-    private val planDoa by lazy {
-        PlansDatabase.getDatabase(this).plansDao()
-    }
+    private val viewModel by lazy { ViewModelProvider(this)[ViewModel::class.java] }
 
     // creating variable that handles Animations loading
     // and initializing it with animation files that we have created
@@ -137,13 +130,7 @@ class MainActivity : AppCompatActivity() {
                     val endDate = dateFormat.format(calendar.time)
                     val newSemester = Semester(semesterName.text.toString(), startDate, endDate)
 
-                    CoroutineScope(IO).launch {
-                        if (planDoa.insertSemester(newSemester) < 1)
-                            Log.e("Save", "Failed")
-                        else
-                            Log.e("Save", "Success")
-                    }
-
+                    viewModel.insertSemester(newSemester)
                     //save in sharedPreferences
                     isFirst = false
                     saveSharedPreferences(semesterName.text.toString())
@@ -199,7 +186,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_calendar -> {
                     loadFragment(CalendarFragment())
                     toolbar.title = "Calender"
-                    Toast.makeText(this, "Clendar", Toast.LENGTH_SHORT).show()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_setting -> {
