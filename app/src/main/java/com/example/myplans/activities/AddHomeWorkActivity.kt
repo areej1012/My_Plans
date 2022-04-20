@@ -17,20 +17,16 @@ import android.widget.Button
 import android.widget.ListView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.myplans.DB.HomeWork
-import com.example.myplans.DB.PlansDatabase
 import com.example.myplans.R
 import com.example.myplans.databinding.ActivityAddHomeWorkBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import java.util.*
 
 class AddHomeWorkActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddHomeWorkBinding
     private var listNameCourse: MutableList<String> = mutableListOf()
-    private val planDao by lazy { PlansDatabase.getDatabase(this).plansDao() }
+    private val viewModel by lazy { ViewModelProvider(this)[ViewModel::class.java] }
     lateinit var datePickerDialog: DatePickerDialog
     lateinit var datePickerDialogReminder: DatePickerDialog
     lateinit var sharedPreferences: SharedPreferences
@@ -70,14 +66,15 @@ class AddHomeWorkActivity : AppCompatActivity() {
         sharedPreferences =
             this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val semester = sharedPreferences.getString("semester", "")
-        CoroutineScope(Dispatchers.IO).launch {
-            val arraySemesterWithCourse = planDao.getSemesterWithCourse(semester!!)
+        val arraySemesterWithCourse = viewModel.getSemesterWithCourse(semester!!)
 
-            val listCourse = arraySemesterWithCourse[0].courses
+        arraySemesterWithCourse.observe(this, { courses ->
+            val listCourse = courses[0].courses
             for (course in listCourse) {
                 listNameCourse.add(course.nameCourse)
             }
-        }
+        })
+
     }
 
     // for menu
@@ -167,14 +164,11 @@ class AddHomeWorkActivity : AppCompatActivity() {
             yearReminder,
             course
         )
-
-        CoroutineScope(IO).launch {
-            if (planDao.insertHomeWork(newHomeWork) < 1)
-                Log.i("Save meeting", "Failed")
-            else {
-                Log.e("Save course", "Success")
-                finish()
-            }
+        if (viewModel.insertHomeWork(newHomeWork) < 1)
+            Log.i("Save meeting", "Failed")
+        else {
+            Log.e("Save course", "Success")
+            finish()
         }
     }
 

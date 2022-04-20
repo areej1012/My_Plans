@@ -226,8 +226,9 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="300dp"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="32dp"
             android:src="@drawable/work" />
 
         <TextView

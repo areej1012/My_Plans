@@ -22,6 +22,10 @@ class Repository(private val planDoa: PlansDao) {
         planDoa.insertMeeting(newMeeting)
     }
 
+    fun insertHomeWork(newHomeWork: HomeWork): Long {
+        return planDoa.insertHomeWork(newHomeWork)
+    }
+
     fun getSemesterWithCourse(Semester: String): LiveData<List<SemesterWithCourses>> {
         return planDoa.getSemesterWithCourse(Semester)
     }

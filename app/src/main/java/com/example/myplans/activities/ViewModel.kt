@@ -4,11 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.myplans.DB.ClassStudent
-import com.example.myplans.DB.PlansDatabase
+import com.example.myplans.DB.*
 import com.example.myplans.DB.Relations.SemesterWithCourses
-import com.example.myplans.DB.Repository
-import com.example.myplans.DB.Semester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -37,13 +34,18 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         CoroutineScope(IO).launch {
             repository.insertClass(newClass)
         }
-
     }
 
-    fun getSemesterWithCourse(Semester: String): LiveData<List<SemesterWithCourses>> {
+    fun insertHomeWork(newHomeWork: HomeWork): Long {
+        var result: Long = 0
         CoroutineScope(IO).launch {
-            semesterList = repository.getSemesterWithCourse(Semester)
+            result = repository.insertHomeWork(newHomeWork)
         }
-        return semesterList
+        return result
+    }
+
+
+    fun getSemesterWithCourse(Semester: String): LiveData<List<SemesterWithCourses>> {
+        return repository.getSemesterWithCourse(Semester)
     }
 }

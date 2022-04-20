@@ -10,9 +10,13 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myplans.DB.*
+import com.example.myplans.DB.ClassStudent
+import com.example.myplans.DB.HomeWork
+import com.example.myplans.DB.Meeting
 import com.example.myplans.R
-import com.example.myplans.adapters.*
+import com.example.myplans.adapters.ClassStudentAdapter
+import com.example.myplans.adapters.HomeWorkAdapter
+import com.example.myplans.adapters.MeetingAdapter
 import com.example.myplans.databinding.FragmentPlanBinding
 
 class PlanFragment : Fragment() {
@@ -114,19 +118,19 @@ class PlanFragment : Fragment() {
         }
     }
 
-    private fun setUpQuiz() {
-        val quiz = listOf<Quiz>(Quiz(2, "Quiz", "12 Oct", "12:00 PM", true, 10, "", 1))
-        binding.rvQuiz.adapter = QuizAdapter(quiz)
-        binding.rvQuiz.layoutManager = LinearLayoutManager(activity)
-    }
+    /*   private fun setUpQuiz() {
+           val quiz = listOf<Quiz>(Quiz(2, "Quiz", "12 Oct", "12:00 PM", true, 10, "", 1))
+           binding.rvQuiz.adapter = QuizAdapter(quiz)
+           binding.rvQuiz.layoutManager = LinearLayoutManager(activity)
+       }
 
-    private fun setUpTask() {
-        val task = listOf<Task>(
-            Task(2, "eso", "83w2", false, false, "12 Oct", "")
-        )
-        binding.rvTask.adapter = TaskAdapter(task)
-        binding.rvTask.layoutManager = LinearLayoutManager(activity)
-    }
+       private fun setUpTask() {
+           val task = listOf<Task>(
+               Task(2, "eso", "83w2", false, false, "12 Oct", "")
+           )
+           binding.rvTask.adapter = TaskAdapter(task)
+           binding.rvTask.layoutManager = LinearLayoutManager(activity)
+       }*/
 
     // this method will handle the onclick options click
     private fun performOptionsMenuClick(position: Int, course: List<ClassStudent>) {
