@@ -32,6 +32,8 @@
         android:ems="10"
         android:hint="@string/_2022_summer_2022"
         android:inputType="textPersonName"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
         app:layout_constraintEnd_toEndOf="parent"

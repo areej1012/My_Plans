@@ -36,7 +36,7 @@ class ClassStudentAdapter(
         val classes = listClass[position]
         holder.binding.apply {
             tvCourse.text = classes.fk_nameCourse
-            tvDate.text = classes.day
+            tvDate.text = daysInArb(classes.day)
             tvTime.text = "${classes.timeStart} - ${classes.timeEnd}"
         }
         // implement on clickListener and pass position of the item
@@ -56,6 +56,21 @@ class ClassStudentAdapter(
     fun update(newList: List<ClassStudent>) {
         listClass = newList
         notifyDataSetChanged()
+    }
+
+    private fun daysInArb(day: String): String {
+        when (day) {
+            "sunday" -> return "الأحد"
+            "monday" -> return "الأثنين"
+            "tuesday" -> return "الثلاثاء"
+            "wednesday" -> return "الأربعاء"
+            "thursday" -> return "الخميس"
+            "friday" -> return "الجمعة"
+            "saturday" -> return "السبت"
+        }
+        return day
+
+
     }
 }
 

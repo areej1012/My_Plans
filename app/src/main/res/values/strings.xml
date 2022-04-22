@@ -60,11 +60,14 @@
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
     <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
     <string name="error_course">Please choose the course</string>
     <string name="error_day">Please choose the day</string>
     <string name="error_time">Please choose the time</string>
     <string name="error_date">Please choose the date</string>
     <string name="new_homework">New HomeWork</string>
+    <string name="new_class">New Class</string>
     <string name="choose_date">Choose Date</string>
     <string name="add_reminder">Add Reminder...</string>
     <string name="fill_title">"Please fill in the title"</string>
@@ -75,6 +78,8 @@
         <item>@string/tuesday</item>
         <item>@string/wednesday</item>
         <item>@string/thursday</item>
+        <item>@string/friday</item>
+        <item>@string/saturday</item>
     </string-array>
 
 </resources>

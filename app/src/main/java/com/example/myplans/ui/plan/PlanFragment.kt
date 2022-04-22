@@ -63,7 +63,6 @@ class PlanFragment : Fragment() {
 
         setUpHomeWork()
 
-        statePlans()
         //  setUpQuiz()
         //   setUpTask()
         return root
@@ -157,10 +156,5 @@ class PlanFragment : Fragment() {
         popupMenu.show()
     }
 
-    private fun statePlans() {
-        if (isTherePlan) {
-            binding.imageView.visibility = View.INVISIBLE
-            binding.tv.visibility = View.INVISIBLE
-        }
-    }
+
 }

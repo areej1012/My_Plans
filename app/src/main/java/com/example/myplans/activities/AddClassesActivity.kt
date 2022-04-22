@@ -104,7 +104,7 @@ class AddClassesActivity : AppCompatActivity() {
                     if (minute < 10) {
                         if (minute == 0)
                             "${hourOfDay}:00 am"
-                        "${hourOfDay}:${minute} am"
+                        "${hourOfDay}:0${minute} am"
                     } else {
                         "${hourOfDay}:${minute} am"
                     }
@@ -118,9 +118,9 @@ class AddClassesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddClassesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        title = ""
         val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
+
 
 
         binding.btCourse.setOnClickListener {
@@ -142,11 +142,12 @@ class AddClassesActivity : AppCompatActivity() {
                 TimePickerDialog(this, R.style.Theme_Dialog, timerEndDialogListener, 10, 0, false)
             timePicker.show()
         }
+
+        retrieveCourse()
     }
 
 
-    override fun onStart() {
-        super.onStart()
+    private fun retrieveCourse() {
         sharedPreferences =
             this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
         val semester = sharedPreferences.getString("semester", "")
@@ -154,12 +155,12 @@ class AddClassesActivity : AppCompatActivity() {
         val arraySemesterWithCourse = viewModel.getSemesterWithCourse(semester!!)
 
         arraySemesterWithCourse.observe(this, { semesterList ->
-            for (course in semesterList) {
-                listNameCourse.add(course.courses[0].nameCourse)
+            val courseList = semesterList[0].courses
+            for (course in courseList) {
+                listNameCourse.add(course.nameCourse)
             }
         })
     }
-
     // for menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_meeting, menu)
@@ -265,17 +266,29 @@ class AddClassesActivity : AppCompatActivity() {
 
 
     private fun saveDB() {
-        val day = binding.btDate.text.toString().trim()
+        val day = daysInEn(binding.btDate.text.toString().trim())
         val timeStart = binding.btTimeStart.text.toString().trim()
         val timeEnd = binding.btTimeEnd.text.toString().trim()
         val courseName = binding.btCourse.text.toString().trim()
         val newClass = ClassStudent(null, day, timeStart, timeEnd, courseName)
 
-
         viewModel.insertClass(newClass)
         finish()
 
 
+    }
+
+    private fun daysInEn(day: String): String {
+        when (day) {
+            "الأحد" -> return "sunday"
+            "الأثنين" -> return "monday"
+            "الثلاثاء" -> return "tuesday"
+            "الأربعاء" -> return "wednesday"
+            "الخميس" -> return "thursday"
+            "الجمعة" -> return "friday"
+            "السبت" -> return "saturday"
+        }
+        return day
     }
 
     override fun onPause() {

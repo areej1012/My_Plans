@@ -60,4 +60,7 @@
     <string name="fill_title">رجاءً أملأ العنوان</string>
     <string name="error_date">رجاءً أختر التاريخ</string>
     <string name="delete">حذف</string>
+    <string name="friday">الجمعة</string>
+    <string name="saturday">السبت</string>
+    <string name="new_class">"صف "</string>
 </resources>
