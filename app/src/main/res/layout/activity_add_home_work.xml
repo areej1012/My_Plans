@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white_sc"
         android:fillViewport="true"
-        android:paddingBottom="16dp"
+        android:paddingBottom="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

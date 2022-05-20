@@ -62,5 +62,6 @@
     <string name="delete">حذف</string>
     <string name="friday">الجمعة</string>
     <string name="saturday">السبت</string>
-    <string name="new_class">"صف "</string>
+    <string name="new_class">حصة جديد</string>
+    <string name="ok">حفظ</string>
 </resources>

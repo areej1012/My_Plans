@@ -37,6 +37,7 @@ class AddClassesActivity : AppCompatActivity() {
                     } else {
                         "${hourOfDay + 12}:${minute} am"
                     }
+
                 }
                 hourOfDay > 12 -> {
                     if (minute < 10) {
@@ -46,6 +47,7 @@ class AddClassesActivity : AppCompatActivity() {
                     } else {
                         "${hourOfDay - 12}:${minute} pm"
                     }
+
                 }
                 hourOfDay == 12 -> {
                     if (minute < 10) {
@@ -55,15 +57,17 @@ class AddClassesActivity : AppCompatActivity() {
                     } else {
                         "${hourOfDay}:${minute} pm"
                     }
+
                 }
                 else -> {
                     if (minute < 10) {
                         if (minute == 0)
                             "${hourOfDay}:00 am"
-                        "${hourOfDay}:${minute} am"
+                        "${hourOfDay}:0${minute} am"
                     } else {
                         "${hourOfDay}:${minute} am"
                     }
+
                 }
             }
 
@@ -119,6 +123,7 @@ class AddClassesActivity : AppCompatActivity() {
         binding = ActivityAddClassesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val toolbar = binding.toolbar
+
         setSupportActionBar(toolbar)
 
 
